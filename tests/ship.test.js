@@ -1,8 +1,5 @@
 import Ship from "../src/ship";
 
-const testShip = new Ship(5);
-testShip.hit = 5;
-
 test("length", () => {
   expect(new Ship(5).length).toEqual(5);
 });
@@ -12,9 +9,17 @@ test("if the ship is sunk", () => {
 });
 
 test("if the ship is sunk", () => {
-  expect(new Ship(5).hit).toEqual(0);
+  expect(new Ship(5).hits).toEqual(0);
 });
 
 test("if the testShip is sunk", () => {
-  expect(testShip.isSunk()).toEqual(true);
+  let testShip1 = new Ship(5);
+  testShip1.hits = 5;
+  expect(testShip1.isSunk()).toEqual(true);
+});
+
+test("if the testShip got hit", () => {
+  let testShip2 = new Ship(5);
+  testShip2.isHit();
+  expect(testShip2.hits).toEqual(1);
 });
