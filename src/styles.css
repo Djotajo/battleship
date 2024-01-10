@@ -1,0 +1,16 @@
+#gameboard {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  background-color: aquamarine;
+  width: 1000px;
+  height: 1000px;
+}
+
+.test1 {
+  background-color: aquamarine;
+}
+
+#gameboard > div {
+  border: 1px solid black;
+}

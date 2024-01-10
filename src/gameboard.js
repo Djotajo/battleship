@@ -25,7 +25,6 @@ export default class Gameboard {
       )[0];
       console.log(startPosition);
       startPosition.ship = destroyer;
-      //   ide ovdje polu recursion lagano
     }
   }
 
@@ -36,16 +35,39 @@ export default class Gameboard {
     if (result.hit === true) {
       console.log("Can't hit the same field twice");
     } else {
-      console.log("Hit!");
       result.hit = true;
       if (result.ship) {
+        console.log("Hit!");
         result.ship.hits++;
+        result.ship.isSunk();
+      } else {
+        console.log("Miss!");
       }
     }
-    result.ship.isSunk();
   }
 
   allShipsSunk() {}
+
+  paint() {
+    const visualBoard = document.getElementById("gameboard");
+    for (let n = 0; n < this.board.length; n++) {
+      let visualField = document.createElement("button");
+      visualField.addEventListener("click", (e) => {
+        this.receiveAttack([this.board[n].coordinates]);
+        visualField.style.backgroundColor = "red";
+      });
+      visualField.innerHTML = this.board[n].coordinates;
+      if (this.board[n].ship === null) {
+        visualField.style.backgroundColor = "green";
+      } else if (this.board[n].hit === true) {
+        visualField.style.backgroundColor = "red";
+      } else {
+        visualField.style.backgroundColor = "blue";
+      }
+      visualBoard.appendChild(visualField);
+    }
+    // this.board.forEach((element) => visualBoard.appendChild(visualField));
+  }
 }
 
 // placeShip(name, length, field) {
