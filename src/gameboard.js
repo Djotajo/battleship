@@ -1,4 +1,5 @@
 import Square from "./square";
+import Ship from "./ship";
 
 export default class Gameboard {
   constructor() {
@@ -13,16 +14,26 @@ export default class Gameboard {
     }
   }
 
-  placeShip(coordinates) {}
-
-  receiveAttack(coords) {
-    // console.log(coordinates);
-    console.log(this.board);
-    const result = this.board.filter(
-      (e) => e.coordinates.toString() == coords.toString()
+  placeShip(name, length, field) {
+    let destroyer = new Ship(length);
+    let position = this.board.filter(
+      (e) => e.coordinates.toString() == field.toString()
     )[0];
-    console.log(result);
+    position.ship = destroyer;
+  }
+
+  receiveAttack(field) {
+    // console.log(coordinates);
+    // console.log(this.board);
+    const result = this.board.filter(
+      (e) => e.coordinates.toString() == field.toString()
+    )[0];
+    console.log(result.ship);
     result.hit = true;
+    if (result.ship) {
+      result.ship.hits++;
+      console.log(result.ship.isSunk());
+    }
   }
 
   allShipsSunk() {}
