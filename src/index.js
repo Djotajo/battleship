@@ -19,6 +19,20 @@ export default function index() {
   console.log(n.board[1].ship);
   n.receiveAttack([0, 1]);
   console.log(n.board[1].ship);
+  n.receiveAttack([0, 2]);
+  console.log(n.board[1].ship);
+  n.receiveAttack([0, 3]);
+  console.log(n.board[1].ship);
+  n.receiveAttack([0, 4]);
+  console.log(n.board[1].ship);
+  n.receiveAttack([0, 5]);
+  console.log(n.board[1].ship);
+  console.log(n.board[2].ship);
+  console.log(n.board[0]);
+  console.log(n.board[1]);
+  console.log(n.board[2]);
+  console.log(n.board[3]);
+  console.log(n.board[4]);
 }
 
 index();
