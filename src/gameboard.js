@@ -57,7 +57,9 @@ export default class Gameboard {
   }
 
   paint() {
-    const visualBoard = document.getElementById("gameboard");
+    const gameboardsDiv = document.getElementById("gameboard");
+    const visualBoard = document.createElement("div");
+
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
       visualField.addEventListener("click", (e) => {
@@ -75,6 +77,6 @@ export default class Gameboard {
       }
       visualBoard.appendChild(visualField);
     }
-    // this.board.forEach((element) => visualBoard.appendChild(visualField));
+    gameboardsDiv.append(visualBoard);
   }
 }
