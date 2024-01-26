@@ -29,34 +29,82 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
+  // placeShipAI(name, length) {
+  //   let ship = new Ship(name, length);
+  //   let field = this.verticalFieldRandomizer(length);
+  //   for (let a = 0; a < length; a++) {
+  //     let startPosition = this.board.filter(
+  //       (e) =>
+  //         e.coordinates.toString() ==
+  //         `${field[0].toString()},${(field[1] + a).toString()}`
+  //     )[0];
+  //     startPosition.ship = ship;
+  //   }
+  //   this.ships.push(ship);
+  // }
+
   placeShipAI(name, length) {
     let ship = new Ship(name, length);
-    let field = this.fieldRandomizerHorizontal(length);
-    console.log(field);
-    let fieldsArray = [];
-    for (let a = 0; a < length; a++) {
-      let startPosition = this.board.filter(
-        (e) =>
-          e.coordinates.toString() ==
-          `${field[0].toString()},${(field[1] + a).toString()}`
-      )[0];
-      startPosition.ship = ship;
+    if (Math.random() < 0.5) {
+      let field = this.horizontalFieldRandomizer(length);
+      for (let a = 0; a < length; a++) {
+        let startPosition = this.board.filter(
+          (e) =>
+            e.coordinates.toString() ==
+            `${field[0].toString()},${(field[1] + a).toString()}`
+        )[0];
+        startPosition.ship = ship;
+      }
+    } else {
+      let field = this.verticalFieldRandomizer(length);
+      for (let a = 0; a < length; a++) {
+        let startPosition = this.board.filter(
+          (e) =>
+            e.coordinates.toString() ==
+            `${(field[0] + a).toString()},${field[1].toString()}`
+        )[0];
+        startPosition.ship = ship;
+      }
     }
     this.ships.push(ship);
   }
 
-  fieldRandomizerHorizontal(length) {
-    return [
+  horizontalFieldRandomizer(length) {
+    let fields = [
       Math.floor(Math.random() * 10),
-      Math.floor(Math.random() * (10 - length)),
+      Math.floor(Math.random() * (11 - length)),
     ];
+    for (let a = 0; a < length; a++) {
+      let startPosition = this.board.filter(
+        (e) =>
+          e.coordinates.toString() ==
+          `${fields[0].toString()},${(fields[1] + a).toString()}`
+      )[0];
+      if (startPosition.ship != null) {
+        return this.horizontalFieldRandomizer(length);
+      } else {
+        return fields;
+      }
+    }
   }
 
-  fieldRandomizerVertical(length) {
-    return [
-      Math.floor(Math.random() * (10 - length)),
+  verticalFieldRandomizer(length) {
+    let fields = [
+      Math.floor(Math.random() * (11 - length)),
       Math.floor(Math.random() * 10),
     ];
+    for (let a = 0; a < length; a++) {
+      let startPosition = this.board.filter(
+        (e) =>
+          e.coordinates.toString() ==
+          `${(fields[0] + a).toString()},${fields[1].toString()}`
+      )[0];
+      if (startPosition.ship != null) {
+        return this.verticalFieldRandomizer(length);
+      } else {
+        return fields;
+      }
+    }
   }
 
   receiveAttack(field) {

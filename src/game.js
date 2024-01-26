@@ -20,10 +20,10 @@ export default function game() {
   player1.board.allShipsSunk();
 
   player2.board.placeShipAI("destroyer", 5);
-  player2.board.placeShip("carrier", 4, [2, 2]);
-  player2.board.placeShip("submarine", 3, [3, 3]);
-  player2.board.placeShip("frigate", 2, [7, 5]);
-  player2.board.placeShip("fishing boat", 1, [9, 6]);
+  player2.board.placeShipAI("carrier", 4);
+  player2.board.placeShipAI("submarine", 3);
+  player2.board.placeShipAI("frigate", 2);
+  player2.board.placeShipAI("fishing boat", 1);
   player2.board.paint();
   player2.board.allShipsSunk();
 
