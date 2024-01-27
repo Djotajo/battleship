@@ -23,3 +23,8 @@
 #gameboard > div {
   border: 1px solid black;
 }
+
+.test1 > button {
+  width: 20px;
+  height: 20px;
+}

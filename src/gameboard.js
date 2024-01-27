@@ -2,7 +2,8 @@ import Square from "./square";
 import Ship from "./ship";
 
 export default class Gameboard {
-  constructor() {
+  constructor(name) {
+    this.name = name;
     this.board = [];
     this.ships = [];
   }
@@ -91,10 +92,6 @@ export default class Gameboard {
     return fields;
   }
 
-  randomAIAttack() {
-    return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
-  }
-
   receiveAttack(field) {
     const result = this.board.filter(
       (e) => e.coordinates.toString() == field.toString()
@@ -103,7 +100,7 @@ export default class Gameboard {
       console.log("Can't hit the same field twice");
     } else {
       result.hit = true;
-      let resultField = document.getElementById(field);
+      let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
         resultField.style.backgroundColor = "yellow";
@@ -116,19 +113,19 @@ export default class Gameboard {
       }
     }
   }
-  receiveAttackColor() {}
 
   allShipsSunk() {
     console.log(this.ships);
     let gameOver = this.ships.every((ship) => ship.sunk === true);
     if (gameOver === true) {
-      console.log("game over");
+      return true;
     }
   }
 
   paint() {
     const gameboardsDiv = document.getElementById("gameboard");
     const visualBoard = document.createElement("div");
+    visualBoard.id = this.name;
 
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
@@ -138,7 +135,7 @@ export default class Gameboard {
         visualField.disabled = true;
       });
       visualField.innerHTML = this.board[n].coordinates;
-      visualField.id = this.board[n].coordinates;
+      visualField.id = `${this.name}_${this.board[n].coordinates}`;
       if (this.board[n].ship === null) {
         visualField.style.backgroundColor = "green";
       } else if (this.board[n].hit === true) {
@@ -154,6 +151,7 @@ export default class Gameboard {
   paintAI() {
     const gameboardsDiv = document.getElementById("gameboard");
     const visualBoard = document.createElement("div");
+    visualBoard.id = this.name;
 
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
