@@ -1,6 +1,8 @@
 import Player from "./player";
 import firstMove from "./firstMove";
 import Gameboard from "./gameboard";
+import isGameOver from "./isGameOver";
+import randomAIAttack from "./randomAIAttack";
 
 export default function game() {
   //   let player1 = new Player(prompt("Enter your name"));
@@ -29,4 +31,12 @@ export default function game() {
 
   console.log(player1);
   console.log(player2);
+
+  player1.board.receiveAttack([0, 1]);
+  player1.board.receiveAttack([1, 1]);
+  console.log(randomAIAttack());
+  player1.board.receiveAttack(randomAIAttack());
+
+  while (!isGameOver) {}
+  console.log("over");
 }

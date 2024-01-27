@@ -12,6 +12,10 @@
   aspect-ratio: 1/1;
 }
 
+#gameboard > div :hover {
+  color: grey;
+}
+
 .test1 {
   background-color: aquamarine;
 }

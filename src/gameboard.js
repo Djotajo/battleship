@@ -29,20 +29,6 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
-  // placeShipAI(name, length) {
-  //   let ship = new Ship(name, length);
-  //   let field = this.verticalFieldRandomizer(length);
-  //   for (let a = 0; a < length; a++) {
-  //     let startPosition = this.board.filter(
-  //       (e) =>
-  //         e.coordinates.toString() ==
-  //         `${field[0].toString()},${(field[1] + a).toString()}`
-  //     )[0];
-  //     startPosition.ship = ship;
-  //   }
-  //   this.ships.push(ship);
-  // }
-
   placeShipAI(name, length) {
     let ship = new Ship(name, length);
     if (Math.random() < 0.5) {
@@ -105,6 +91,10 @@ export default class Gameboard {
     return fields;
   }
 
+  randomAIAttack() {
+    return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+  }
+
   receiveAttack(field) {
     const result = this.board.filter(
       (e) => e.coordinates.toString() == field.toString()
@@ -113,16 +103,20 @@ export default class Gameboard {
       console.log("Can't hit the same field twice");
     } else {
       result.hit = true;
+      let resultField = document.getElementById(field);
       if (result.ship) {
         console.log("Hit!");
+        resultField.style.backgroundColor = "yellow";
         result.ship.hits++;
         result.ship.isSunk();
         this.allShipsSunk();
       } else {
         console.log("Miss!");
+        resultField.style.backgroundColor = "red";
       }
     }
   }
+  receiveAttackColor() {}
 
   allShipsSunk() {
     console.log(this.ships);
@@ -144,6 +138,7 @@ export default class Gameboard {
         visualField.disabled = true;
       });
       visualField.innerHTML = this.board[n].coordinates;
+      visualField.id = this.board[n].coordinates;
       if (this.board[n].ship === null) {
         visualField.style.backgroundColor = "green";
       } else if (this.board[n].hit === true) {
@@ -176,3 +171,17 @@ export default class Gameboard {
     gameboardsDiv.append(visualBoard);
   }
 }
+
+// placeShipAI(name, length) {
+//   let ship = new Ship(name, length);
+//   let field = this.verticalFieldRandomizer(length);
+//   for (let a = 0; a < length; a++) {
+//     let startPosition = this.board.filter(
+//       (e) =>
+//         e.coordinates.toString() ==
+//         `${field[0].toString()},${(field[1] + a).toString()}`
+//     )[0];
+//     startPosition.ship = ship;
+//   }
+//   this.ships.push(ship);
+// }
