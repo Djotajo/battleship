@@ -80,12 +80,11 @@ export default class Gameboard {
           e.coordinates.toString() ==
           `${fields[0].toString()},${(fields[1] + a).toString()}`
       )[0];
-      if (startPosition.ship != null) {
+      while (startPosition.ship != null) {
         return this.horizontalFieldRandomizer(length);
-      } else {
-        return fields;
       }
     }
+    return fields;
   }
 
   verticalFieldRandomizer(length) {
@@ -99,12 +98,11 @@ export default class Gameboard {
           e.coordinates.toString() ==
           `${(fields[0] + a).toString()},${fields[1].toString()}`
       )[0];
-      if (startPosition.ship != null) {
+      while (startPosition.ship != null) {
         return this.verticalFieldRandomizer(length);
-      } else {
-        return fields;
       }
     }
+    return fields;
   }
 
   receiveAttack(field) {
