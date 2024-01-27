@@ -67,4 +67,13 @@ export default function game() {
       currentTurn(player1, player2);
     })
   );
+
+  // board2.forEach((element) =>
+  //   element.addEventListener("click", function () {
+  //     setTimeout(function () {
+  //       console.log("kru te jebo");
+  //       // currentTurn(player1, player2);
+  //     }, 5000);
+  //   })
+  // );
 }
