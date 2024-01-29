@@ -4,6 +4,7 @@ import Gameboard from "./gameboard";
 import isGameOver from "./isGameOver";
 import randomAIAttack from "./randomAIAttack";
 import currentTurn from "./currentTurn";
+import newNoteForm from "./dialog";
 
 export default function game() {
   //   let player1 = new Player(prompt("Enter your name"));
@@ -53,11 +54,46 @@ export default function game() {
   let test1 = document.querySelector(".test1");
   test1.appendChild(turn2);
 
-  let turn3 = document.createElement("button");
-  turn3.addEventListener("click", (e) => {
-    currentTurn(player1, player2);
+  // let turn3 = newNoteForm();
+  // // turn3.addEventListener("click", (e) => {
+  // //   currentTurn(player1, player2);
+  // // });
+  // test1.appendChild(turn3);
+
+  // dialog pocetak
+  const addNewNote = document.createElement("button");
+  addNewNote.innerHTML = "Add new note";
+  test1.appendChild(addNewNote);
+
+  const newNoteFormDiv = document.createElement("div");
+  newNoteFormDiv.innerHTML = newNoteForm(player1.board.paint);
+  test1.appendChild(newNoteFormDiv);
+
+  const addNote = document.getElementById("addNote");
+  const confirmBtn = addNote.querySelector("#confirmBtn");
+  const closeBtn = document.querySelector("#closeBtn");
+
+  // const title = document.querySelector("#title");
+  const text = document.querySelector("#text");
+
+  // Storage
+
+  addNewNote.addEventListener("click", () => {
+    addNote.showModal();
   });
-  test1.appendChild(turn3);
+
+  closeBtn.addEventListener("click", () => {
+    addNote.close();
+    noteForm.reset();
+  });
+
+  let original = document.querySelector("#player1");
+  let copy = original.cloneNode(true);
+
+  let copyLocation = document.querySelector("#text");
+  copyLocation.append(copy);
+
+  // dialog kraj
 
   let board2 = document.querySelectorAll("#player2 > button");
 

@@ -28,3 +28,43 @@
   width: 20px;
   height: 20px;
 }
+
+dialog {
+  width: 50%;
+}
+#text > div {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  background-color: aquamarine;
+  width: 60%;
+  aspect-ratio: 1/1;
+}
+
+/* FORM CSS */
+form > p {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+}
+
+form > div {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1vh;
+  /* display: grid;
+  grid-template-rows: repeat(5 1fr); */
+  /* gap: 1vh; */
+  /* width: clamp(100px, 20%, 900px); */
+}
