@@ -16,6 +16,14 @@
   color: grey;
 }
 
+#text div :hover {
+  color: red;
+}
+
+dialog > button :hover {
+  color: red;
+}
+
 .test1 {
   background-color: aquamarine;
 }
