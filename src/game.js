@@ -115,28 +115,70 @@ export default function game() {
   const shipButton1 = document.createElement("button");
   const shipButton2 = document.createElement("button");
   const shipButton3 = document.createElement("button");
+  const shipButton4 = document.createElement("button");
+  const shipButton5 = document.createElement("button");
 
   let currentShip;
 
+  shipButton1.innerHTML = "Destroyer";
   shipButton1.addEventListener("click", function () {
-    currentShip = { name: "frigate", length: 2 };
+    currentShip = { name: "Destroyer", length: 5 };
     console.log(currentShip);
   });
-
   test1.appendChild(shipButton1);
 
-  let testButton = document.getElementById("player1_6,7");
-  let testCoordinates = testButton.innerHTML
-    .split(",")
-    .map((element) => Number(element));
-  testButton.addEventListener("click", function () {
-    console.log(testCoordinates);
-    player1.board.placeShip(
-      currentShip.name,
-      currentShip.length,
-      testCoordinates
-    );
-
-    console.log(player1.board);
+  shipButton2.innerHTML = "Carrier";
+  shipButton2.addEventListener("click", function () {
+    currentShip = { name: "Carrier", length: 4 };
+    console.log(currentShip);
   });
+  test1.appendChild(shipButton2);
+
+  shipButton3.innerHTML = "Submarine";
+  shipButton3.addEventListener("click", function () {
+    currentShip = { name: "Submarine", length: 3 };
+    console.log(currentShip);
+  });
+  test1.appendChild(shipButton3);
+
+  shipButton4.innerHTML = "Frigate";
+  shipButton4.addEventListener("click", function () {
+    currentShip = { name: "Frigate", length: 5 };
+    console.log(currentShip);
+  });
+  test1.appendChild(shipButton4);
+
+  shipButton5.innerHTML = "Fishing boat";
+  shipButton5.addEventListener("click", function () {
+    currentShip = { name: "Fishing boat", length: 2 };
+    console.log(currentShip);
+  });
+  test1.appendChild(shipButton5);
+
+  let testButtons = document.querySelectorAll("#player1 > button");
+  testButtons.forEach((item) => addShipToField(item));
+
+  // let testButton = document.getElementById("player1_6,7");
+
+  function addShipToField(field) {
+    let testCoordinates = field.innerHTML
+      .split(",")
+      .map((element) => Number(element));
+    field.addEventListener("click", function () {
+      console.log(testCoordinates);
+      if (currentShip === undefined) {
+        console.log("no ship selected");
+      } else if (testCoordinates[1] + currentShip.length > 9) {
+        console.log("ship too large");
+      } else {
+        player1.board.placeShip(
+          currentShip.name,
+          currentShip.length,
+          testCoordinates
+        );
+
+        console.log(player1.board);
+      }
+    });
+  }
 }
