@@ -61,55 +61,82 @@ export default function game() {
   // test1.appendChild(turn3);
 
   // dialog pocetak
-  const addNewNote = document.createElement("button");
-  addNewNote.innerHTML = "Add new note";
-  test1.appendChild(addNewNote);
+  // const addNewNote = document.createElement("button");
+  // addNewNote.innerHTML = "Add new note";
+  // test1.appendChild(addNewNote);
 
-  const newNoteFormDiv = document.createElement("div");
-  newNoteFormDiv.innerHTML = newNoteForm(player1.board.paint);
-  test1.appendChild(newNoteFormDiv);
+  // const newNoteFormDiv = document.createElement("div");
+  // newNoteFormDiv.innerHTML = newNoteForm(player1.board.paint);
+  // test1.appendChild(newNoteFormDiv);
 
-  const addNote = document.getElementById("addNote");
-  const confirmBtn = addNote.querySelector("#confirmBtn");
-  const closeBtn = document.querySelector("#closeBtn");
+  // const addNote = document.getElementById("addNote");
+  // const confirmBtn = addNote.querySelector("#confirmBtn");
+  // const closeBtn = document.querySelector("#closeBtn");
 
-  // const title = document.querySelector("#title");
-  const text = document.querySelector("#text");
+  // // const title = document.querySelector("#title");
+  // const text = document.querySelector("#text");
 
-  // Storage
+  // // Storage
 
-  addNewNote.addEventListener("click", () => {
-    addNote.showModal();
-  });
+  // addNewNote.addEventListener("click", () => {
+  //   addNote.showModal();
+  // });
 
-  closeBtn.addEventListener("click", () => {
-    addNote.close();
-    noteForm.reset();
-  });
+  // closeBtn.addEventListener("click", () => {
+  //   addNote.close();
+  //   noteForm.reset();
+  // });
 
-  let original = document.querySelector("#player1");
-  let copy = original.cloneNode(true);
+  // let original = document.querySelector("#player1");
+  // let copy = original.cloneNode(true);
 
-  let copyLocation = document.querySelector("#text");
-  copyLocation.append(copy);
+  // let copyLocation = document.querySelector("#text");
+  // copyLocation.append(copy);
 
-  // dialog kraj
+  // // dialog kraj
 
-  let board2 = document.querySelectorAll("#player2 > button");
-
-  board2.forEach((element) =>
-    element.addEventListener("click", () => {
-      console.log("kru te jebo");
-      currentTurn(player1, player2);
-    })
-  );
+  // let board2 = document.querySelectorAll("#player2 > button");
 
   // board2.forEach((element) =>
-  //   element.addEventListener("click", function () {
-  //     setTimeout(function () {
-  //       console.log("kru te jebo");
-  //       // currentTurn(player1, player2);
-  //     }, 5000);
+  //   element.addEventListener("click", () => {
+  //     console.log("kru te jebo");
+  //     currentTurn(player1, player2);
   //   })
   // );
+
+  // ships buttons
+
+  // player1.board.placeShip("destroyer", 5, [0, 1]);
+  // player1.board.placeShip("carrier", 4, [2, 2]);
+  // player1.board.placeShip("submarine", 3, [3, 3]);
+  // player1.board.placeShip("frigate", 2, [7, 5]);
+  // player1.board.placeShip("fishing boat", 1, [9, 6]);
+
+  const shipButton1 = document.createElement("button");
+  const shipButton2 = document.createElement("button");
+  const shipButton3 = document.createElement("button");
+
+  let currentShip;
+
+  shipButton1.addEventListener("click", function () {
+    currentShip = { name: "frigate", length: 2 };
+    console.log(currentShip);
+  });
+
+  test1.appendChild(shipButton1);
+
+  let testButton = document.getElementById("player1_6,7");
+  let testCoordinates = testButton.innerHTML
+    .split(",")
+    .map((element) => Number(element));
+  testButton.addEventListener("click", function () {
+    console.log(testCoordinates);
+    player1.board.placeShip(
+      currentShip.name,
+      currentShip.length,
+      testCoordinates
+    );
+
+    console.log(player1.board);
+  });
 }

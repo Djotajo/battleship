@@ -30,6 +30,19 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
+  placeShipPlayer(name, length, field) {
+    let ship = new Ship(name, length);
+    for (let a = 0; a < length; a++) {
+      let startPosition = this.board.filter(
+        (e) =>
+          e.coordinates.toString() ==
+          `${field[0].toString()},${(field[1] + a).toString()}`
+      )[0];
+      startPosition.ship = ship;
+    }
+    this.ships.push(ship);
+  }
+
   placeShipAI(name, length) {
     let ship = new Ship(name, length);
     if (Math.random() < 0.5) {
