@@ -99,7 +99,6 @@ export default function game() {
 
   // board2.forEach((element) =>
   //   element.addEventListener("click", () => {
-  //     console.log("kru te jebo");
   //     currentTurn(player1, player2);
   //   })
   // );
@@ -129,23 +128,36 @@ export default function game() {
 
     for (let button of testButtons) {
       let defCoords = button.innerHTML;
-      button.addEventListener("mouseover", (e) => {
-        for (let n = 0; n < currentShip.length; n++) {
-          let newButton = document.getElementById(
-            `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
-          );
-          newButton.style.backgroundColor = "blue";
-        }
-        // button.style.backgroundColor = "blue";
-      });
-      button.addEventListener("mouseout", (e) => {
-        for (let n = 0; n < currentShip.length; n++) {
-          let newButton = document.getElementById(
-            `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
-          );
-          newButton.style.backgroundColor = "green";
-        }
-      });
+      if (Number(defCoords[2]) + currentShip.length > 10) {
+        button.addEventListener("mouseover", (e) => {
+          button.style.backgroundColor = "red";
+        });
+        button.addEventListener("mouseout", (e) => {
+          button.style.backgroundColor = "green";
+        });
+      } else {
+        button.addEventListener("mouseover", (e) => {
+          for (let n = 0; n < currentShip.length; n++) {
+            let newButton = document.getElementById(
+              `player1_${defCoords[0]}${defCoords[1]}${
+                Number(defCoords[2]) + n
+              }`
+            );
+            newButton.style.backgroundColor = "blue";
+          }
+          // button.style.backgroundColor = "blue";
+        });
+        button.addEventListener("mouseout", (e) => {
+          for (let n = 0; n < currentShip.length; n++) {
+            let newButton = document.getElementById(
+              `player1_${defCoords[0]}${defCoords[1]}${
+                Number(defCoords[2]) + n
+              }`
+            );
+            newButton.style.backgroundColor = "green";
+          }
+        });
+      }
     }
   });
   test1.appendChild(shipButton1);
