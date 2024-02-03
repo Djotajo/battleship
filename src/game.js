@@ -126,6 +126,27 @@ export default function game() {
     currentShip = { name: "Destroyer", length: 5 };
     currentButton = shipButton1;
     console.log(currentShip);
+
+    for (let button of testButtons) {
+      let defCoords = button.innerHTML;
+      button.addEventListener("mouseover", (e) => {
+        for (let n = 0; n < currentShip.length; n++) {
+          let newButton = document.getElementById(
+            `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+          );
+          newButton.style.backgroundColor = "blue";
+        }
+        // button.style.backgroundColor = "blue";
+      });
+      button.addEventListener("mouseout", (e) => {
+        for (let n = 0; n < currentShip.length; n++) {
+          let newButton = document.getElementById(
+            `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+          );
+          newButton.style.backgroundColor = "green";
+        }
+      });
+    }
   });
   test1.appendChild(shipButton1);
 
@@ -147,7 +168,7 @@ export default function game() {
 
   shipButton4.innerHTML = "Frigate";
   shipButton4.addEventListener("click", function () {
-    currentShip = { name: "Frigate", length: 5 };
+    currentShip = { name: "Frigate", length: 3 };
     currentButton = shipButton4;
     console.log(currentShip);
   });
@@ -163,26 +184,15 @@ export default function game() {
 
   let testButtons = document.querySelectorAll("#player1 > button");
   testButtons.forEach((item) => addShipToField(item));
-  // testButtons.forEach((item) =>
-  //   addEventListener("mouseover", (e) => {
-  //     item.style.backgroundColor = "blue";
-  //   })
-  // );
-  // testButtons.forEach((item) =>
-  //   addEventListener("mouseout", (e) => {
-  //     e.target.style.backgroundColor = "yellow";
-  //   })
-  // );
 
-  for (let button of testButtons) {
-    button.addEventListener("mouseover", (e) => {
-      button.style.backgroundColor = "blue";
-    });
-    button.addEventListener("mouseout", (e) => {
-      button.style.backgroundColor = "green";
-    });
-  }
-
+  // for (let button of testButtons) {
+  //   button.addEventListener("mouseover", (e) => {
+  //     button.style.backgroundColor = "blue";
+  //   });
+  //   button.addEventListener("mouseout", (e) => {
+  //     button.style.backgroundColor = "green";
+  //   });
+  // }
   // let testButton = document.getElementById("player1_6,7");
 
   function addShipToField(field) {
