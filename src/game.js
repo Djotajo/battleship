@@ -119,10 +119,12 @@ export default function game() {
   const shipButton5 = document.createElement("button");
 
   let currentShip;
+  let currentButton;
 
   shipButton1.innerHTML = "Destroyer";
   shipButton1.addEventListener("click", function () {
     currentShip = { name: "Destroyer", length: 5 };
+    currentButton = shipButton1;
     console.log(currentShip);
   });
   test1.appendChild(shipButton1);
@@ -130,6 +132,7 @@ export default function game() {
   shipButton2.innerHTML = "Carrier";
   shipButton2.addEventListener("click", function () {
     currentShip = { name: "Carrier", length: 4 };
+    currentButton = shipButton2;
     console.log(currentShip);
   });
   test1.appendChild(shipButton2);
@@ -137,6 +140,7 @@ export default function game() {
   shipButton3.innerHTML = "Submarine";
   shipButton3.addEventListener("click", function () {
     currentShip = { name: "Submarine", length: 3 };
+    currentButton = shipButton3;
     console.log(currentShip);
   });
   test1.appendChild(shipButton3);
@@ -144,6 +148,7 @@ export default function game() {
   shipButton4.innerHTML = "Frigate";
   shipButton4.addEventListener("click", function () {
     currentShip = { name: "Frigate", length: 5 };
+    currentButton = shipButton4;
     console.log(currentShip);
   });
   test1.appendChild(shipButton4);
@@ -151,12 +156,32 @@ export default function game() {
   shipButton5.innerHTML = "Fishing boat";
   shipButton5.addEventListener("click", function () {
     currentShip = { name: "Fishing boat", length: 2 };
+    currentButton = shipButton5;
     console.log(currentShip);
   });
   test1.appendChild(shipButton5);
 
   let testButtons = document.querySelectorAll("#player1 > button");
   testButtons.forEach((item) => addShipToField(item));
+  // testButtons.forEach((item) =>
+  //   addEventListener("mouseover", (e) => {
+  //     item.style.backgroundColor = "blue";
+  //   })
+  // );
+  // testButtons.forEach((item) =>
+  //   addEventListener("mouseout", (e) => {
+  //     e.target.style.backgroundColor = "yellow";
+  //   })
+  // );
+
+  for (let button of testButtons) {
+    button.addEventListener("mouseover", (e) => {
+      button.style.backgroundColor = "blue";
+    });
+    button.addEventListener("mouseout", (e) => {
+      button.style.backgroundColor = "green";
+    });
+  }
 
   // let testButton = document.getElementById("player1_6,7");
 
@@ -165,7 +190,6 @@ export default function game() {
       .split(",")
       .map((element) => Number(element));
     field.addEventListener("click", function () {
-      console.log(testCoordinates);
       if (currentShip === undefined) {
         console.log("no ship selected");
       } else if (testCoordinates[1] + currentShip.length > 9) {
@@ -176,9 +200,14 @@ export default function game() {
           currentShip.length,
           testCoordinates
         );
-
+        currentButton.disabled = true;
+        currentShip = undefined;
+        console.log(currentButton);
         console.log(player1.board);
       }
+    });
+    field.addEventListener("mouseenter", (e) => {
+      field.style.setProperty("--field-background-color", "#00ff00");
     });
   }
 }
