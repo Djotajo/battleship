@@ -3,5 +3,6 @@ export default class Square {
     this.coordinates = coordinates;
     this.ship = null;
     this.hit = false;
+    this.img = null;
   }
 }

@@ -15,8 +15,22 @@ export default function game() {
   player1.board.boardFill();
   player2.board = new Gameboard("player2");
   player2.board.boardFill();
-  player1.board.placeShip("destroyer", 5, [0, 1]);
-  player1.board.placeShip("carrier", 4, [2, 2]);
+  // player1.board.placeShip("destroyer", 5, [0, 1]);
+  player1.board.placeImgShipPlayer(
+    "battleship",
+    5,
+    "../assets/battleship00",
+    [0, 1]
+  );
+
+  player1.board.placeImgShipPlayer(
+    "destroyer",
+    4,
+    "../assets/destroyer00",
+    [2, 2]
+  );
+
+  // player1.board.placeShip("carrier", 4, [2, 2]);
   player1.board.placeShip("submarine", 3, [3, 3]);
   player1.board.placeShip("frigate", 2, [7, 5]);
   player1.board.placeShip("fishing boat", 1, [9, 6]);
@@ -156,6 +170,18 @@ export default function game() {
             );
             newButton.style.backgroundColor = "green";
           }
+        });
+        button.addEventListener("click", (e) => {
+          for (let n = 0; n < currentShip.length; n++) {
+            let newButton = document.getElementById(
+              `player1_${defCoords[0]}${defCoords[1]}${
+                Number(defCoords[2]) + n
+              }`
+            );
+            newButton.style.backgroundColor = "red";
+            addShipToField(newButton);
+          }
+          // button.style.backgroundColor = "blue";
         });
       }
     }

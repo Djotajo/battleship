@@ -10,6 +10,15 @@
   background-color: aquamarine;
   width: 30%;
   aspect-ratio: 1/1;
+  padding: 0;
+}
+
+#gameboard button {
+  padding: 0;
+  height: auto;
+  width: auto;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #gameboard > div :hover {
@@ -75,4 +84,10 @@ form {
   grid-template-rows: repeat(5 1fr); */
   /* gap: 1vh; */
   /* width: clamp(100px, 20%, 900px); */
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

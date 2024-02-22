@@ -1,5 +1,6 @@
 import Square from "./square";
 import Ship from "./ship";
+import ShipImg from "./shipWithImage";
 
 export default class Gameboard {
   constructor(name) {
@@ -39,6 +40,20 @@ export default class Gameboard {
           `${field[0].toString()},${(field[1] + a).toString()}`
       )[0];
       startPosition.ship = ship;
+    }
+    this.ships.push(ship);
+  }
+
+  placeImgShipPlayer(name, length, img, field) {
+    let ship = new ShipImg(name, length, img);
+    for (let a = 0; a < length; a++) {
+      let startPosition = this.board.filter(
+        (e) =>
+          e.coordinates.toString() ==
+          `${field[0].toString()},${(field[1] + a).toString()}`
+      )[0];
+      startPosition.ship = ship;
+      startPosition.img = `${ship.img}${a}.png`;
     }
     this.ships.push(ship);
   }
@@ -144,10 +159,15 @@ export default class Gameboard {
       let visualField = document.createElement("button");
       visualField.addEventListener("click", (e) => {
         this.receiveAttack([this.board[n].coordinates]);
-        visualField.style.backgroundColor = "red";
+        // visualField.style.backgroundColor = "red";
         visualField.disabled = true;
+        let slika = document.createElement("img");
+        slika.src = `${this.board[n].img}`;
+        // visualField.appendChild(slika);
+        visualField.style.backgroundImage = `url(${this.board[n].img})`;
+        console.log(`Slika ${this.board[n].ship.img}`);
       });
-      visualField.innerHTML = this.board[n].coordinates;
+      // visualField.innerHTML = this.board[n].coordinates;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       if (this.board[n].ship === null) {
         visualField.style.backgroundColor = "green";
@@ -182,6 +202,8 @@ export default class Gameboard {
     gameboardsDiv.append(visualBoard);
   }
 }
+
+// console.log(e.target.getBoundingClientRect());
 
 // placeShipAI(name, length) {
 //   let ship = new Ship(name, length);
