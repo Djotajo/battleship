@@ -4,7 +4,7 @@ import Gameboard from "./gameboard";
 import isGameOver from "./isGameOver";
 import randomAIAttack from "./randomAIAttack";
 import currentTurn from "./currentTurn";
-import newNoteForm from "./dialog";
+import newNoteForm from "./newNoteForm";
 
 export default function game() {
   //   let player1 = new Player(prompt("Enter your name"));
@@ -37,11 +37,12 @@ export default function game() {
   player1.board.paint();
   player1.board.allShipsSunk();
 
-  player2.board.placeImgShipAI("destroyer", 5, "../assets/battleship00");
-  player2.board.placeShipAI("carrier", 4);
-  player2.board.placeShipAI("submarine", 3);
-  player2.board.placeShipAI("frigate", 2);
-  player2.board.placeShipAI("fishing boat", 1);
+  player2.board.placeImgShipAI("battleship", 5, "../assets/battleship00");
+  player2.board.placeImgShipAI("destroyer", 4, "../assets/destroyer00");
+  player2.board.placeImgShipAI("submarine", 3, "../assets/submarine00");
+  player2.board.placeImgShipAI("cruiser", 3, "../assets/cruiser00");
+  player2.board.placeImgShipAI("gunboat", 2, "../assets/gunboat00");
+
   player2.board.paint();
   player2.board.allShipsSunk();
 
@@ -75,47 +76,53 @@ export default function game() {
   // test1.appendChild(turn3);
 
   // dialog pocetak
-  // const addNewNote = document.createElement("button");
-  // addNewNote.innerHTML = "Add new note";
-  // test1.appendChild(addNewNote);
+  const addNewNote = document.createElement("button");
+  addNewNote.innerHTML = "Place your ships";
+  test1.appendChild(addNewNote);
 
-  // const newNoteFormDiv = document.createElement("div");
-  // newNoteFormDiv.innerHTML = newNoteForm(player1.board.paint);
-  // test1.appendChild(newNoteFormDiv);
+  const newNoteFormDiv = document.createElement("div");
+  newNoteFormDiv.innerHTML = newNoteForm(player1.board.paint);
+  test1.appendChild(newNoteFormDiv);
 
-  // const addNote = document.getElementById("addNote");
-  // const confirmBtn = addNote.querySelector("#confirmBtn");
-  // const closeBtn = document.querySelector("#closeBtn");
+  const forma = document.querySelector("#noteForm");
+  function handleForm(event) {
+    event.preventDefault();
+  }
+  forma.addEventListener("submit", handleForm);
 
-  // // const title = document.querySelector("#title");
-  // const text = document.querySelector("#text");
+  const addNote = document.getElementById("addNote");
+  const confirmBtn = addNote.querySelector("#confirmBtn");
+  const closeBtn = document.querySelector("#closeBtn");
 
-  // // Storage
+  // const title = document.querySelector("#title");
+  const text = document.querySelector("#text");
 
-  // addNewNote.addEventListener("click", () => {
-  //   addNote.showModal();
-  // });
+  // Storage
 
-  // closeBtn.addEventListener("click", () => {
-  //   addNote.close();
-  //   noteForm.reset();
-  // });
+  addNewNote.addEventListener("click", () => {
+    addNote.showModal();
+  });
 
-  // let original = document.querySelector("#player1");
-  // let copy = original.cloneNode(true);
+  closeBtn.addEventListener("click", () => {
+    addNote.close();
+    noteForm.reset();
+  });
 
-  // let copyLocation = document.querySelector("#text");
-  // copyLocation.append(copy);
+  let original = document.querySelector("#player1");
+  let copy = original.cloneNode(true);
 
-  // // dialog kraj
+  let copyLocation = document.querySelector("#text");
+  copyLocation.append(copy);
 
-  // let board2 = document.querySelectorAll("#player2 > button");
+  // dialog kraj
 
-  // board2.forEach((element) =>
-  //   element.addEventListener("click", () => {
-  //     currentTurn(player1, player2);
-  //   })
-  // );
+  let board2 = document.querySelectorAll("#player2 > button");
+
+  board2.forEach((element) =>
+    element.addEventListener("click", () => {
+      currentTurn(player1, player2);
+    })
+  );
 
   // ships buttons
 
@@ -134,22 +141,21 @@ export default function game() {
   let currentShip;
   let currentButton;
 
-  shipButton1.innerHTML = "Destroyer";
+  shipButton1.innerHTML = "Battleship";
   shipButton1.addEventListener("click", function () {
-    currentShip = { name: "Destroyer", length: 5 };
+    currentShip = {
+      name: "battleship",
+      length: 5,
+      img: "../assets/battleship00",
+    };
     currentButton = shipButton1;
     console.log(currentShip);
 
     for (let button of testButtons) {
       let defCoords = button.innerHTML;
-      if (Number(defCoords[2]) + currentShip.length > 10) {
-        button.addEventListener("mouseover", (e) => {
-          button.style.backgroundColor = "red";
-        });
-        button.addEventListener("mouseout", (e) => {
-          button.style.backgroundColor = "green";
-        });
-      } else {
+      if (currentShip === undefined) {
+        return;
+      } else if (Number(defCoords[2]) + currentShip.length <= 10) {
         button.addEventListener("mouseover", (e) => {
           for (let n = 0; n < currentShip.length; n++) {
             let newButton = document.getElementById(
@@ -159,7 +165,6 @@ export default function game() {
             );
             newButton.style.backgroundColor = "blue";
           }
-          // button.style.backgroundColor = "blue";
         });
         button.addEventListener("mouseout", (e) => {
           for (let n = 0; n < currentShip.length; n++) {
@@ -168,7 +173,7 @@ export default function game() {
                 Number(defCoords[2]) + n
               }`
             );
-            newButton.style.backgroundColor = "green";
+            newButton.style.backgroundColor = "white";
           }
         });
         button.addEventListener("click", (e) => {
@@ -178,43 +183,91 @@ export default function game() {
                 Number(defCoords[2]) + n
               }`
             );
-            newButton.style.backgroundColor = "red";
             addShipToField(newButton);
+            return;
           }
-          // button.style.backgroundColor = "blue";
+          return;
         });
       }
     }
   });
   test1.appendChild(shipButton1);
 
-  shipButton2.innerHTML = "Carrier";
+  shipButton2.innerHTML = "Destroyer";
   shipButton2.addEventListener("click", function () {
-    currentShip = { name: "Carrier", length: 4 };
+    currentShip = {
+      name: "destroyer",
+      length: 4,
+      img: "../assets/destroyer00",
+    };
     currentButton = shipButton2;
     console.log(currentShip);
+
+    for (let button of testButtons) {
+      let defCoords = button.innerHTML;
+      if (currentShip === undefined) {
+        return;
+      } else if (Number(defCoords[2]) + currentShip.length <= 10) {
+        button.addEventListener("mouseover", (e) => {
+          for (let n = 0; n < currentShip.length; n++) {
+            let newButton = document.getElementById(
+              `player1_${defCoords[0]}${defCoords[1]}${
+                Number(defCoords[2]) + n
+              }`
+            );
+            newButton.style.backgroundColor = "blue";
+          }
+        });
+        button.addEventListener("mouseout", (e) => {
+          for (let n = 0; n < currentShip.length; n++) {
+            let newButton = document.getElementById(
+              `player1_${defCoords[0]}${defCoords[1]}${
+                Number(defCoords[2]) + n
+              }`
+            );
+            newButton.style.backgroundColor = "white";
+          }
+        });
+        button.addEventListener("click", (e) => {
+          for (let n = 0; n < currentShip.length; n++) {
+            let newButton = document.getElementById(
+              `player1_${defCoords[0]}${defCoords[1]}${
+                Number(defCoords[2]) + n
+              }`
+            );
+            addShipToField(newButton);
+            return;
+          }
+          return;
+        });
+      }
+    }
   });
   test1.appendChild(shipButton2);
 
   shipButton3.innerHTML = "Submarine";
   shipButton3.addEventListener("click", function () {
-    currentShip = { name: "Submarine", length: 3 };
+    currentShip = {
+      name: "submarine",
+      length: 3,
+      img: "../assets/submarine00",
+    };
     currentButton = shipButton3;
     console.log(currentShip);
   });
   test1.appendChild(shipButton3);
 
-  shipButton4.innerHTML = "Frigate";
+  shipButton4.innerHTML = "Cruiser";
   shipButton4.addEventListener("click", function () {
-    currentShip = { name: "Frigate", length: 3 };
+    currentShip = { name: "cruiser", length: 3, img: "../assets/cruiser00" };
     currentButton = shipButton4;
     console.log(currentShip);
   });
   test1.appendChild(shipButton4);
 
-  shipButton5.innerHTML = "Fishing boat";
+  shipButton5.innerHTML = "Gunboat";
   shipButton5.addEventListener("click", function () {
-    currentShip = { name: "Fishing boat", length: 2 };
+    currentShip = { name: "gunboat", length: 2, img: "../assets/gunboat00" };
     currentButton = shipButton5;
     console.log(currentShip);
   });
@@ -233,6 +286,34 @@ export default function game() {
   // }
   // let testButton = document.getElementById("player1_6,7");
 
+  // original
+  // function addShipToField(field) {
+  //   let testCoordinates = field.innerHTML
+  //     .split(",")
+  //     .map((element) => Number(element));
+  //   field.addEventListener("click", function () {
+  //     if (currentShip === undefined) {
+  //       console.log("no ship selected");
+  //     } else if (testCoordinates[1] + currentShip.length > 9) {
+  //       console.log("ship too large");
+  //     } else {
+  //       player1.board.placeShip(
+  //         currentShip.name,
+  //         currentShip.length,
+  //         testCoordinates
+  //       );
+  //       currentButton.disabled = true;
+  //       currentShip = undefined;
+  //       console.log(currentButton);
+  //       console.log(player1.board);
+  //     }
+  //   });
+  //   field.addEventListener("mouseenter", (e) => {
+  //     field.style.setProperty("--field-background-color", "#00ff00");
+  //   });
+  // }
+
+  // test kopija
   function addShipToField(field) {
     let testCoordinates = field.innerHTML
       .split(",")
@@ -240,22 +321,85 @@ export default function game() {
     field.addEventListener("click", function () {
       if (currentShip === undefined) {
         console.log("no ship selected");
-      } else if (testCoordinates[1] + currentShip.length > 9) {
+      } else if (testCoordinates[1] + currentShip.length > 10) {
         console.log("ship too large");
       } else {
-        player1.board.placeShip(
+        player1.board.placeImgShipPlayer(
           currentShip.name,
           currentShip.length,
+          currentShip.img,
           testCoordinates
         );
         currentButton.disabled = true;
         currentShip = undefined;
         console.log(currentButton);
         console.log(player1.board);
+        return;
       }
     });
-    field.addEventListener("mouseenter", (e) => {
-      field.style.setProperty("--field-background-color", "#00ff00");
-    });
+    // field.addEventListener("mouseenter", (e) => {
+    //   field.style.setProperty("--field-background-color", "#00ff00");
+    // });
+    return currentShip;
   }
 }
+
+// original ship place manual function
+// shipButton2.innerHTML = "Destroyer";
+// shipButton2.addEventListener("click", function () {
+//   currentShip = {
+//     name: "destroyer",
+//     length: 4,
+//     img: "../assets/destroyer00",
+//   };
+//   currentButton = shipButton2;
+//   console.log(currentShip);
+
+//   for (let button of testButtons) {
+//     let defCoords = button.innerHTML;
+//     if (Number(defCoords[2]) + currentShip.length > 10) {
+//       button.addEventListener("mouseover", (e) => {
+//         button.style.backgroundColor = "red";
+//       });
+//       button.addEventListener("mouseout", (e) => {
+//         button.style.backgroundColor = "white";
+//       });
+//     } else {
+//       button.addEventListener("mouseover", (e) => {
+//         for (let n = 0; n < currentShip.length; n++) {
+//           let newButton = document.getElementById(
+//             `player1_${defCoords[0]}${defCoords[1]}${
+//               Number(defCoords[2]) + n
+//             }`
+//           );
+//           newButton.style.backgroundColor = "blue";
+//         }
+//         // button.style.backgroundColor = "blue";
+//       });
+//       button.addEventListener("mouseout", (e) => {
+//         for (let n = 0; n < currentShip.length; n++) {
+//           let newButton = document.getElementById(
+//             `player1_${defCoords[0]}${defCoords[1]}${
+//               Number(defCoords[2]) + n
+//             }`
+//           );
+//           newButton.style.backgroundColor = "white";
+//         }
+//       });
+//       button.addEventListener("click", (e) => {
+//         for (let n = 0; n < currentShip.length; n++) {
+//           let newButton = document.getElementById(
+//             `player1_${defCoords[0]}${defCoords[1]}${
+//               Number(defCoords[2]) + n
+//             }`
+//           );
+//           newButton.style.backgroundColor = "red";
+//           addShipToField(newButton);
+
+//           return;
+//         }
+//         // button.style.backgroundColor = "blue";
+//       });
+//     }
+//   }
+// });

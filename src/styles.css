@@ -98,3 +98,11 @@ form {
 .rotated {
   transform: rotate(90deg);
 }
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}

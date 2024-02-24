@@ -193,20 +193,19 @@ export default class Gameboard {
         if (this.board[n].orientation === "vertical") {
           visualField.classList.add("rotated");
         }
-        console.log(this.board[n]);
         visualField.disabled = true;
-        visualField.style.backgroundImage = `url(${this.board[n].img})`;
-        // visualField.classList.add("rotated");
+        if (this.board[n].ship === null) {
+          visualField.style.backgroundColor = "red";
+        } else if (this.board[n].hit === true) {
+          // visualField.style.backgroundColor = "red";
+          visualField.style.backgroundImage = `url(${this.board[n].img})`;
+        } else {
+          visualField.style.backgroundColor = "blue";
+        }
       });
-      // visualField.innerHTML = this.board[n].coordinates;
+      visualField.innerHTML = this.board[n].coordinates;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
-      if (this.board[n].ship === null) {
-        visualField.style.backgroundColor = "green";
-      } else if (this.board[n].hit === true) {
-        visualField.style.backgroundColor = "red";
-      } else {
-        visualField.style.backgroundColor = "blue";
-      }
+      // visualField.style.backgroundColor = "blue";
       visualBoard.appendChild(visualField);
     }
     gameboardsDiv.append(visualBoard);
