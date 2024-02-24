@@ -19,6 +19,8 @@
   width: auto;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+
+  /* transform: rotate(90deg); */
 }
 
 #gameboard > div :hover {
@@ -86,8 +88,13 @@ form {
   /* width: clamp(100px, 20%, 900px); */
 }
 
-img {
+/* img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  transform: rotate(90deg);
+} */
+
+.rotated {
+  transform: rotate(90deg);
 }

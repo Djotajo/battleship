@@ -37,7 +37,7 @@ export default function game() {
   player1.board.paint();
   player1.board.allShipsSunk();
 
-  player2.board.placeShipAI("destroyer", 5);
+  player2.board.placeImgShipAI("destroyer", 5, "../assets/battleship00");
   player2.board.placeShipAI("carrier", 4);
   player2.board.placeShipAI("submarine", 3);
   player2.board.placeShipAI("frigate", 2);

@@ -58,6 +58,35 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
+  placeImgShipAI(name, length, img) {
+    let ship = new ShipImg(name, length, img);
+    if (Math.random() < 0.5) {
+      let field = this.horizontalFieldRandomizer(length);
+      for (let a = 0; a < length; a++) {
+        let startPosition = this.board.filter(
+          (e) =>
+            e.coordinates.toString() ==
+            `${field[0].toString()},${(field[1] + a).toString()}`
+        )[0];
+        startPosition.ship = ship;
+        startPosition.img = `${ship.img}${a}.png`;
+      }
+    } else {
+      let field = this.verticalFieldRandomizer(length);
+      for (let a = 0; a < length; a++) {
+        let startPosition = this.board.filter(
+          (e) =>
+            e.coordinates.toString() ==
+            `${(field[0] + a).toString()},${field[1].toString()}`
+        )[0];
+        startPosition.ship = ship;
+        startPosition.img = `${ship.img}${a}.png`;
+        startPosition.orientation = "vertical";
+      }
+    }
+    this.ships.push(ship);
+  }
+
   placeShipAI(name, length) {
     let ship = new Ship(name, length);
     if (Math.random() < 0.5) {
@@ -79,6 +108,7 @@ export default class Gameboard {
             `${(field[0] + a).toString()},${field[1].toString()}`
         )[0];
         startPosition.ship = ship;
+        startPosition.orientation = "vertical";
       }
     }
     this.ships.push(ship);
@@ -160,12 +190,13 @@ export default class Gameboard {
       visualField.addEventListener("click", (e) => {
         this.receiveAttack([this.board[n].coordinates]);
         // visualField.style.backgroundColor = "red";
+        if (this.board[n].orientation === "vertical") {
+          visualField.classList.add("rotated");
+        }
+        console.log(this.board[n]);
         visualField.disabled = true;
-        let slika = document.createElement("img");
-        slika.src = `${this.board[n].img}`;
-        // visualField.appendChild(slika);
         visualField.style.backgroundImage = `url(${this.board[n].img})`;
-        console.log(`Slika ${this.board[n].ship.img}`);
+        // visualField.classList.add("rotated");
       });
       // visualField.innerHTML = this.board[n].coordinates;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;

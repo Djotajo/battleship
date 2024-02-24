@@ -4,5 +4,6 @@ export default class Square {
     this.ship = null;
     this.hit = false;
     this.img = null;
+    this.orientation = "horizontal";
   }
 }
