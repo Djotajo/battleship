@@ -96,6 +96,8 @@ export default function game() {
 
   // const title = document.querySelector("#title");
   const text = document.querySelector("#text");
+  const modalShipButtons = document.createElement("div");
+  text.insertAdjacentElement("beforebegin", modalShipButtons);
 
   // Storage
 
@@ -191,7 +193,8 @@ export default function game() {
       }
     }
   });
-  test1.appendChild(shipButton1);
+  modalShipButtons.appendChild(shipButton1);
+  // test1.appendChild(shipButton1);
 
   shipButton2.innerHTML = "Destroyer";
   shipButton2.addEventListener("click", function () {
@@ -243,7 +246,7 @@ export default function game() {
       }
     }
   });
-  test1.appendChild(shipButton2);
+  modalShipButtons.appendChild(shipButton2);
 
   shipButton3.innerHTML = "Submarine";
   shipButton3.addEventListener("click", function () {
@@ -255,7 +258,7 @@ export default function game() {
     currentButton = shipButton3;
     console.log(currentShip);
   });
-  test1.appendChild(shipButton3);
+  modalShipButtons.appendChild(shipButton3);
 
   shipButton4.innerHTML = "Cruiser";
   shipButton4.addEventListener("click", function () {
@@ -263,7 +266,7 @@ export default function game() {
     currentButton = shipButton4;
     console.log(currentShip);
   });
-  test1.appendChild(shipButton4);
+  modalShipButtons.appendChild(shipButton4);
 
   shipButton5.innerHTML = "Gunboat";
   shipButton5.addEventListener("click", function () {
@@ -271,7 +274,8 @@ export default function game() {
     currentButton = shipButton5;
     console.log(currentShip);
   });
-  test1.appendChild(shipButton5);
+  modalShipButtons.appendChild(shipButton5);
+  // test1.appendChild(shipButton5);
 
   let testButtons = document.querySelectorAll("#player1 > button");
   testButtons.forEach((item) => addShipToField(item));
