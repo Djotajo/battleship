@@ -5,5 +5,6 @@ export default class Square {
     this.hit = false;
     this.img = null;
     this.orientation = "horizontal";
+    this.name = coordinates.join("");
   }
 }

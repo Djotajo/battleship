@@ -54,6 +54,7 @@ export default class Gameboard {
       )[0];
       startPosition.ship = ship;
       startPosition.img = `${ship.img}${a}.png`;
+      console.log(startPosition);
     }
     this.ships.push(ship);
   }
@@ -161,7 +162,7 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
-        resultField.style.backgroundColor = "yellow";
+        // resultField.style.backgroundColor = "yellow";
         result.ship.hits++;
         result.ship.isSunk();
         this.allShipsSunk();

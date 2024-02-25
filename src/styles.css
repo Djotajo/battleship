@@ -106,3 +106,15 @@ form {
 .blue {
   color: blue;
 }
+
+/* .test1 :hover {
+  background-color: blueviolet;
+} */
+
+#text button {
+  padding: 0;
+  height: auto;
+  width: auto;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
