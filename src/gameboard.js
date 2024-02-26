@@ -44,6 +44,33 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
+  // placeImgShipPlayer(name, length, img, field) {
+  //   let ship = new ShipImg(name, length, img);
+  //   for (let a = 0; a < length; a++) {
+  //     let startPosition = this.board.filter(
+  //       (e) =>
+  //         e.coordinates.toString() ==
+  //         `${field[0].toString()},${(field[1] + a).toString()}`
+  //     )[0];
+  //     if (startPosition.ship != undefined) {
+  //       alert("Can't place this ship here capt'n");
+  //       return null;
+  //     }
+  //   }
+  //   for (let a = 0; a < length; a++) {
+  //     let startPosition = this.board.filter(
+  //       (e) =>
+  //         e.coordinates.toString() ==
+  //         `${field[0].toString()},${(field[1] + a).toString()}`
+  //     )[0];
+  //     startPosition.ship = ship;
+  //     startPosition.img = `${ship.img}${a}.png`;
+  //     console.log(startPosition);
+  //   }
+  //   this.ships.push(ship);
+  // }
+
+  // original
   placeImgShipPlayer(name, length, img, field) {
     let ship = new ShipImg(name, length, img);
     for (let a = 0; a < length; a++) {

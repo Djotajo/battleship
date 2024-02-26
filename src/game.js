@@ -169,16 +169,39 @@ export default function game() {
 
   let testButtons = document.querySelectorAll("#player1 > button");
 
+  function checkFree(button, length) {
+    let defCoords = button.innerHTML;
+    let free = undefined;
+    for (let n = 0; n < length; n++) {
+      let newButton = document.getElementById(
+        `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+      );
+      if (newButton.classList.contains("shipped")) {
+        free = false;
+        return free;
+      }
+      free = true;
+    }
+    return free;
+  }
+
   for (let button of testButtons) {
     let defCoords = button.innerHTML;
     button.addEventListener("mouseover", (e) => {
       if (currentShip === undefined) {
-      } else if (Number(defCoords[2]) + currentShip.length <= 10) {
+      } else if (
+        Number(defCoords[2]) + currentShip.length <= 10 &&
+        checkFree(button, currentShip.length) === true
+      ) {
         for (let n = 0; n < currentShip.length; n++) {
           let newButton = document.getElementById(
             `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
           );
-          newButton.style.backgroundColor = "blue";
+          if (newButton.classList.contains("shipped")) {
+            newButton.style.backgroundColor = "white";
+          } else {
+            newButton.style.backgroundColor = "blue";
+          }
         }
       }
     });
@@ -197,7 +220,8 @@ export default function game() {
       if (currentShip === undefined) {
       } else if (
         currentShip != undefined &&
-        Number(defCoords[2]) + currentShip.length <= 10
+        Number(defCoords[2]) + currentShip.length <= 10 &&
+        checkFree(button, currentShip.length) === true
       ) {
         let newButton = document.getElementById(
           `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2])}`
@@ -219,7 +243,10 @@ export default function game() {
         (element) =>
           element.name === `${defCoords[0]}${Number(defCoords[2]) + n}`
       );
+      shipField.classList.add("shipped");
       shipField.style.backgroundImage = `url(${found.img})`;
+      // ideja
+      // shipField.disabled = true;
       console.log(found);
     }
   }
