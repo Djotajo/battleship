@@ -208,6 +208,7 @@ export default class Gameboard {
     }
   }
 
+  // original
   paint() {
     const gameboardsDiv = document.getElementById("gameboard");
     const visualBoard = document.createElement("div");
@@ -215,22 +216,22 @@ export default class Gameboard {
 
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
-      visualField.addEventListener("click", (e) => {
-        this.receiveAttack([this.board[n].coordinates]);
-        // visualField.style.backgroundColor = "red";
-        if (this.board[n].orientation === "vertical") {
-          visualField.classList.add("rotated");
-        }
-        visualField.disabled = true;
-        if (this.board[n].ship === null) {
-          visualField.style.backgroundColor = "red";
-        } else if (this.board[n].hit === true) {
-          // visualField.style.backgroundColor = "red";
-          visualField.style.backgroundImage = `url(${this.board[n].img})`;
-        } else {
-          visualField.style.backgroundColor = "blue";
-        }
-      });
+      // visualField.addEventListener("click", (e) => {
+      //   this.receiveAttack([this.board[n].coordinates]);
+      //   // visualField.style.backgroundColor = "red";
+      //   if (this.board[n].orientation === "vertical") {
+      //     visualField.classList.add("rotated");
+      //   }
+      //   visualField.disabled = true;
+      //   if (this.board[n].ship === null) {
+      //     visualField.style.backgroundColor = "red";
+      //   } else if (this.board[n].hit === true) {
+      //     // visualField.style.backgroundColor = "red";
+      //     visualField.style.backgroundImage = `url(${this.board[n].img})`;
+      //   } else {
+      //     visualField.style.backgroundColor = "blue";
+      //   }
+      // });
       visualField.innerHTML = this.board[n].coordinates;
       visualField.style.backgroundImage = `url(${this.board[n].img})`;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
@@ -238,6 +239,38 @@ export default class Gameboard {
       visualBoard.appendChild(visualField);
     }
     gameboardsDiv.append(visualBoard);
+  }
+
+  paintModal() {
+    const gameboardsDiv = document.getElementById("gameboard");
+    const visualBoard = document.createElement("div");
+    visualBoard.id = this.name;
+
+    for (let n = 0; n < this.board.length; n++) {
+      let visualField = document.createElement("button");
+      // visualField.addEventListener("click", (e) => {
+      //   this.receiveAttack([this.board[n].coordinates]);
+      //   // visualField.style.backgroundColor = "red";
+      //   if (this.board[n].orientation === "vertical") {
+      //     visualField.classList.add("rotated");
+      //   }
+      //   visualField.disabled = true;
+      //   if (this.board[n].ship === null) {
+      //     visualField.style.backgroundColor = "red";
+      //   } else if (this.board[n].hit === true) {
+      //     // visualField.style.backgroundColor = "red";
+      //     visualField.style.backgroundImage = `url(${this.board[n].img})`;
+      //   } else {
+      //     visualField.style.backgroundColor = "blue";
+      //   }
+      // });
+      visualField.innerHTML = this.board[n].coordinates;
+      visualField.style.backgroundImage = `url(${this.board[n].img})`;
+      visualField.id = `${this.name}_${this.board[n].coordinates}`;
+      // visualField.style.backgroundColor = "blue";
+      visualBoard.appendChild(visualField);
+    }
+    return visualBoard;
   }
 
   paintAI() {

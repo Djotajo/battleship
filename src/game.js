@@ -11,58 +11,17 @@ export default function game() {
   let player1 = new Player("Djordje");
   let player2 = new Player("AI");
   // firstMove(player1, player2);
-  player1.board = new Gameboard("player1");
-  player1.board.boardFill();
-  player2.board = new Gameboard("player2");
-  player2.board.boardFill();
-  player1.board.paint();
-  player1.board.allShipsSunk();
 
-  player2.board.placeImgShipAI("battleship", 5, "../assets/battleship00");
-  player2.board.placeImgShipAI("destroyer", 4, "../assets/destroyer00");
-  player2.board.placeImgShipAI("submarine", 3, "../assets/submarine00");
-  player2.board.placeImgShipAI("cruiser", 3, "../assets/cruiser00");
-  player2.board.placeImgShipAI("gunboat", 2, "../assets/gunboat00");
+  const gameboardsDiv = document.getElementById("gameboard");
 
-  player2.board.paintAI();
-  player2.board.allShipsSunk();
-
-  console.log(player1);
-  console.log(player2);
-
-  player1.board.receiveAttack([0, 1]);
-  player1.board.receiveAttack([1, 1]);
-  console.log(randomAIAttack());
-  player1.board.receiveAttack(randomAIAttack());
-  player2.turn = false;
-
-  if (player2.turn === true) {
-    player1.board.receiveAttack(randomAIAttack());
-    player2.turn = false;
-  }
-  // console.log(isGameOver());
-
-  let turn2 = document.createElement("button");
-  turn2.addEventListener("click", (e) => {
-    player2.turn = true;
-    console.log(player2);
-  });
   let test1 = document.querySelector(".test1");
-  test1.appendChild(turn2);
-
-  // let turn3 = newNoteForm();
-  // // turn3.addEventListener("click", (e) => {
-  // //   currentTurn(player1, player2);
-  // // });
-  // test1.appendChild(turn3);
-
   // dialog pocetak
   const addNewNote = document.createElement("button");
   addNewNote.innerHTML = "Place your ships";
   test1.appendChild(addNewNote);
 
   const newNoteFormDiv = document.createElement("div");
-  newNoteFormDiv.innerHTML = newNoteForm(player1.board.paint);
+  newNoteFormDiv.innerHTML = newNoteForm();
   test1.appendChild(newNoteFormDiv);
 
   const forma = document.querySelector("#noteForm");
@@ -90,16 +49,65 @@ export default function game() {
     addNote.close();
     // privremeno rjesenje za dvije tabele
     text.remove();
-    copy.removeAttribute("id");
+    // copy.removeAttribute("id");
     player1.board.paint();
+
     noteForm.reset();
   });
 
-  let original = document.querySelector("#player1");
-  let copy = original.cloneNode(true);
+  // let original = document.querySelector("#player1");
+  // let copy = original.cloneNode(true);
+  player1.board = new Gameboard("player1");
+  player1.board.boardFill();
+  player2.board = new Gameboard("player2");
+  player2.board.boardFill();
+  player2.board.paintAI();
+  let newOriginal = player1.board.paintModal();
 
   let copyLocation = document.querySelector("#text");
-  copyLocation.append(copy);
+  // copyLocation.append(copy);
+  copyLocation.append(newOriginal);
+
+  // dialog kraj
+
+  // player1.board = new Gameboard("player1");
+  // player1.board.boardFill();
+  // player2.board = new Gameboard("player2");
+  // player2.board.boardFill();
+  // player1.board.paint();
+  player1.board.allShipsSunk();
+
+  player2.board.placeImgShipAI("battleship", 5, "../assets/battleship00");
+  player2.board.placeImgShipAI("destroyer", 4, "../assets/destroyer00");
+  player2.board.placeImgShipAI("submarine", 3, "../assets/submarine00");
+  player2.board.placeImgShipAI("cruiser", 3, "../assets/cruiser00");
+  player2.board.placeImgShipAI("gunboat", 2, "../assets/gunboat00");
+
+  // player2.board.paintAI();
+  player2.board.allShipsSunk();
+
+  if (player2.turn === true) {
+    player1.board.receiveAttack(randomAIAttack());
+    console.log("rukaj");
+    player2.turn = false;
+  }
+  // console.log(isGameOver());
+
+  let turn2 = document.createElement("button");
+  turn2.addEventListener("click", (e) => {
+    player2.turn = true;
+    console.log(player2);
+  });
+
+  test1.appendChild(turn2);
+
+  // let turn3 = newNoteForm();
+  // // turn3.addEventListener("click", (e) => {
+  // //   currentTurn(player1, player2);
+  // // });
+  // test1.appendChild(turn3);
+
+  // dialog pocetak
 
   // dialog kraj
 

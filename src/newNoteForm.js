@@ -1,6 +1,6 @@
-export default function newNoteForm(gameboard) {
-  let original = document.querySelector("#player1");
-  let copy = original.cloneNode(true);
+export default function newNoteForm() {
+  // let original = document.querySelector("#player1");
+  // let copy = original.cloneNode(true);
   return `<dialog id="addNote">
         <form id="noteForm">
             <p>
