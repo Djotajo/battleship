@@ -15,25 +15,6 @@ export default function game() {
   player1.board.boardFill();
   player2.board = new Gameboard("player2");
   player2.board.boardFill();
-  // player1.board.placeShip("destroyer", 5, [0, 1]);
-  // player1.board.placeImgShipPlayer(
-  //   "battleship",
-  //   5,
-  //   "../assets/battleship00",
-  //   [0, 1]
-  // );
-
-  // player1.board.placeImgShipPlayer(
-  //   "destroyer",
-  //   4,
-  //   "../assets/destroyer00",
-  //   [2, 2]
-  // );
-
-  // player1.board.placeShip("carrier", 4, [2, 2]);
-  // player1.board.placeShip("submarine", 3, [3, 3]);
-  // player1.board.placeShip("frigate", 2, [7, 5]);
-  // player1.board.placeShip("fishing boat", 1, [9, 6]);
   player1.board.paint();
   player1.board.allShipsSunk();
 
@@ -43,7 +24,7 @@ export default function game() {
   player2.board.placeImgShipAI("cruiser", 3, "../assets/cruiser00");
   player2.board.placeImgShipAI("gunboat", 2, "../assets/gunboat00");
 
-  player2.board.paint();
+  player2.board.paintAI();
   player2.board.allShipsSunk();
 
   console.log(player1);
@@ -110,6 +91,7 @@ export default function game() {
     // privremeno rjesenje za dvije tabele
     text.remove();
     copy.removeAttribute("id");
+    player1.board.paint();
     noteForm.reset();
   });
 
@@ -128,14 +110,6 @@ export default function game() {
       currentTurn(player1, player2);
     })
   );
-
-  // ships buttons
-
-  // player1.board.placeShip("destroyer", 5, [0, 1]);
-  // player1.board.placeShip("carrier", 4, [2, 2]);
-  // player1.board.placeShip("submarine", 3, [3, 3]);
-  // player1.board.placeShip("frigate", 2, [7, 5]);
-  // player1.board.placeShip("fishing boat", 1, [9, 6]);
 
   const shipButton1 = document.createElement("button");
   const shipButton2 = document.createElement("button");
@@ -192,10 +166,8 @@ export default function game() {
     currentButton = shipButton5;
   });
   modalShipButtons.appendChild(shipButton5);
-  // test1.appendChild(shipButton5);
 
   let testButtons = document.querySelectorAll("#player1 > button");
-  // testButtons.forEach((item) => addShipToField(item));
 
   for (let button of testButtons) {
     let defCoords = button.innerHTML;
@@ -231,14 +203,6 @@ export default function game() {
           `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2])}`
         );
         addShipToField(newButton);
-
-        // for (let n = 0; n < currentShip.length; n++) {
-        //   console.log(n);
-        //   let newButton = document.getElementById(
-        //     `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
-        //   );
-        //   addShipToField(newButton, n);
-        // }
         currentShip = undefined;
       }
     });
@@ -270,8 +234,6 @@ export default function game() {
       currentShip.img,
       testCoordinates
     );
-    // field.style.backgroundImage = currentShip.img;
-    // console.log(`${currentShip.img}${imgField}.png`);
     console.log(field);
     currentButton.disabled = true;
     // currentShip = undefined;

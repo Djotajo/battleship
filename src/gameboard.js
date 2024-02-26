@@ -205,6 +205,7 @@ export default class Gameboard {
         }
       });
       visualField.innerHTML = this.board[n].coordinates;
+      visualField.style.backgroundImage = `url(${this.board[n].img})`;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       // visualField.style.backgroundColor = "blue";
       visualBoard.appendChild(visualField);
@@ -221,13 +222,24 @@ export default class Gameboard {
       let visualField = document.createElement("button");
       visualField.addEventListener("click", (e) => {
         this.receiveAttack([this.board[n].coordinates]);
-        visualField.style.backgroundColor = "red";
+        if (this.board[n].orientation === "vertical") {
+          visualField.classList.add("rotated");
+        }
         visualField.disabled = true;
+        if (this.board[n].ship === null) {
+          visualField.style.backgroundColor = "red";
+        } else if (this.board[n].hit === true) {
+          // visualField.style.backgroundColor = "red";
+          visualField.style.backgroundImage = `url(${this.board[n].img})`;
+        } else {
+          visualField.style.backgroundColor = "blue";
+        }
       });
       visualField.innerHTML = this.board[n].coordinates;
-      if (this.board[n].hit === true) {
-        visualField.style.backgroundColor = "red";
-      }
+      // if (this.board[n].hit === true) {
+      //   visualField.style.backgroundColor = "red";
+      // }
+      visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);
     }
     gameboardsDiv.append(visualBoard);
