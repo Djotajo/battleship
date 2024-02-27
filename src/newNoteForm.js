@@ -4,7 +4,8 @@ export default function newNoteForm() {
   return `<dialog id="addNote">
         <form id="noteForm">
             <p>
-                <label for="text">Text</label>
+                <label for="text"></label>
+                <div id="caption">Choose your ship</div>
                 <div id="text"></div>
             </p>
                 <div>

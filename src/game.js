@@ -81,6 +81,7 @@ export default function game() {
   // player2.board = new Gameboard("player2");
   // player2.board.boardFill();
   // player1.board.paint();
+
   player1.board.allShipsSunk();
 
   player2.board.placeImgShipAI("battleship", 5, "../assets/battleship00");
@@ -99,13 +100,13 @@ export default function game() {
   }
   // console.log(isGameOver());
 
-  let turn2 = document.createElement("button");
-  turn2.addEventListener("click", (e) => {
-    player2.turn = true;
-    console.log(player2);
-  });
+  // let turn2 = document.createElement("button");
+  // turn2.addEventListener("click", (e) => {
+  //   player2.turn = true;
+  //   console.log(player2);
+  // });
 
-  test1.appendChild(turn2);
+  // test1.appendChild(turn2);
 
   // let turn3 = newNoteForm();
   // // turn3.addEventListener("click", (e) => {
@@ -116,6 +117,8 @@ export default function game() {
   // dialog pocetak
 
   // dialog kraj
+
+  const modalLog = document.getElementById("caption");
 
   let board2 = document.querySelectorAll("#player2 > button");
 
@@ -134,54 +137,62 @@ export default function game() {
   let currentShip;
   let currentButton;
 
-  shipButton1.innerHTML = "Battleship";
+  function changeCaption(ship, length) {
+    modalLog.innerText = `Place your ${ship}! It has a size of ${length}`;
+  }
+
   shipButton1.addEventListener("click", function () {
     currentShip = {
-      name: "battleship",
+      name: "Battleship",
       length: 5,
       img: "../assets/battleship00",
     };
     currentButton = shipButton1;
+    changeCaption(currentShip.name, currentShip.length);
   });
   modalShipButtons.appendChild(shipButton1);
 
-  shipButton1.style.backgroundImage = `url("../assets/Full ships/05 - Battleship.png")`;
-
-  shipButton2.innerHTML = "Destroyer";
   shipButton2.addEventListener("click", function () {
     currentShip = {
-      name: "destroyer",
+      name: "Destroyer",
       length: 4,
       img: "../assets/destroyer00",
     };
     currentButton = shipButton2;
+    changeCaption(currentShip.name, currentShip.length);
   });
   modalShipButtons.appendChild(shipButton2);
 
-  shipButton3.innerHTML = "Submarine";
   shipButton3.addEventListener("click", function () {
     currentShip = {
-      name: "submarine",
+      name: "Submarine",
       length: 3,
       img: "../assets/submarine00",
     };
     currentButton = shipButton3;
+    changeCaption(currentShip.name, currentShip.length);
   });
   modalShipButtons.appendChild(shipButton3);
 
-  shipButton4.innerHTML = "Cruiser";
   shipButton4.addEventListener("click", function () {
-    currentShip = { name: "cruiser", length: 3, img: "../assets/cruiser00" };
+    currentShip = { name: "Cruiser", length: 3, img: "../assets/cruiser00" };
     currentButton = shipButton4;
+    changeCaption(currentShip.name, currentShip.length);
   });
   modalShipButtons.appendChild(shipButton4);
 
-  shipButton5.innerHTML = "Gunboat";
   shipButton5.addEventListener("click", function () {
-    currentShip = { name: "gunboat", length: 2, img: "../assets/gunboat00" };
+    currentShip = { name: "Gunboat", length: 2, img: "../assets/gunboat00" };
     currentButton = shipButton5;
+    changeCaption(currentShip.name, currentShip.length);
   });
   modalShipButtons.appendChild(shipButton5);
+
+  shipButton1.style.backgroundImage = `url("../assets/Full ships/05 - Battleship.png")`;
+  shipButton2.style.backgroundImage = `url("../assets/Full ships/04 - Destroyer.png")`;
+  shipButton3.style.backgroundImage = `url("../assets/Full ships/03 - Submarine.png")`;
+  shipButton4.style.backgroundImage = `url("../assets/Full ships/03 - Cruiser.png")`;
+  shipButton5.style.backgroundImage = `url("../assets/Full ships/02 - Gunboat.png")`;
 
   let testButtons = document.querySelectorAll("#player1 > button");
 
@@ -285,6 +296,7 @@ export default function game() {
     console.log(currentButton);
     console.log(player1.board);
     drawShips(field, currentShip.length);
+    modalLog.innerText = "Choose your ship";
     return;
     field.addEventListener("click", function () {
       if (currentShip === undefined) {
@@ -313,6 +325,12 @@ export default function game() {
     return currentShip;
   }
 }
+
+// shipButton1.innerHTML = "Battleship";
+// shipButton2.innerHTML = "Destroyer";
+// shipButton3.innerHTML = "Submarine";
+// shipButton4.innerHTML = "Cruiser";
+// shipButton5.innerHTML = "Gunboat";
 
 // original ship place manual function
 // shipButton2.innerHTML = "Destroyer";
