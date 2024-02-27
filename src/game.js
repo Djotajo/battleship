@@ -37,7 +37,8 @@ export default function game() {
   // const title = document.querySelector("#title");
   const text = document.querySelector("#text");
   const modalShipButtons = document.createElement("div");
-  text.insertAdjacentElement("beforebegin", modalShipButtons);
+  modalShipButtons.classList.add("modalShipButtons");
+  text.insertAdjacentElement("afterbegin", modalShipButtons);
 
   // Storage
 
@@ -51,17 +52,22 @@ export default function game() {
     text.remove();
     // copy.removeAttribute("id");
     player1.board.paint();
-
+    player2.board.paintAI();
+    let board2 = document.querySelectorAll("#player2 > button");
+    board2.forEach((element) =>
+      element.addEventListener("click", () => {
+        currentTurn(player1, player2);
+      })
+    );
+    addNewNote.disabled = true;
     noteForm.reset();
   });
 
-  // let original = document.querySelector("#player1");
-  // let copy = original.cloneNode(true);
   player1.board = new Gameboard("player1");
   player1.board.boardFill();
   player2.board = new Gameboard("player2");
   player2.board.boardFill();
-  player2.board.paintAI();
+  // player2.board.paintAI();
   let newOriginal = player1.board.paintModal();
 
   let copyLocation = document.querySelector("#text");
@@ -139,6 +145,8 @@ export default function game() {
   });
   modalShipButtons.appendChild(shipButton1);
 
+  shipButton1.style.backgroundImage = `url("../assets/Full ships/05 - Battleship.png")`;
+
   shipButton2.innerHTML = "Destroyer";
   shipButton2.addEventListener("click", function () {
     currentShip = {
@@ -176,6 +184,8 @@ export default function game() {
   modalShipButtons.appendChild(shipButton5);
 
   let testButtons = document.querySelectorAll("#player1 > button");
+
+  // text.appendChild(modalShipButtons);
 
   function checkFree(button, length) {
     let defCoords = button.innerHTML;

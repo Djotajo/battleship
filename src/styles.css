@@ -51,7 +51,7 @@ dialog > button :hover {
 dialog {
   width: 50%;
 }
-#text > div {
+#text > #player1 {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
@@ -117,4 +117,14 @@ form {
   width: auto;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+#text {
+  display: flex;
+}
+
+.modalShipButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
