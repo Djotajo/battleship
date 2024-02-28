@@ -41,6 +41,7 @@ export default function game() {
   text.insertAdjacentElement("afterbegin", modalShipButtons);
 
   // Storage
+  confirmBtn.disabled = true;
 
   addNewNote.addEventListener("click", () => {
     addNote.showModal();
@@ -48,9 +49,18 @@ export default function game() {
 
   closeBtn.addEventListener("click", () => {
     addNote.close();
-    // privremeno rjesenje za dvije tabele
+    noteForm.reset();
+  });
+
+  function checkConfirmBtn(board) {
+    if (board.ships.length >= 5) {
+      confirmBtn.disabled = false;
+    }
+  }
+
+  confirmBtn.addEventListener("click", () => {
+    addNote.close();
     text.remove();
-    // copy.removeAttribute("id");
     player1.board.paint();
     player2.board.paintAI();
     let board2 = document.querySelectorAll("#player2 > button");
@@ -60,7 +70,9 @@ export default function game() {
       })
     );
     addNewNote.disabled = true;
+    addNewNote.hidden = true;
     noteForm.reset();
+    console.log(player1.board);
   });
 
   player1.board = new Gameboard("player1");
@@ -257,6 +269,7 @@ export default function game() {
         );
         addShipToField(newButton);
         currentShip = undefined;
+        checkConfirmBtn(player1.board);
       }
     });
   }
