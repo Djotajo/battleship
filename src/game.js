@@ -1,7 +1,7 @@
 import Player from "./player";
 import firstMove from "./firstMove";
 import Gameboard from "./gameboard";
-import isGameOver from "./isGameOver";
+import isGameOver from "./gameOver";
 import randomAIAttack from "./randomAIAttack";
 import currentTurn from "./currentTurn";
 import newNoteForm from "./newNoteForm";
@@ -102,8 +102,13 @@ export default function game() {
   // player2.board.paintAI();
   player2.board.allShipsSunk();
 
+  const enemyAttacks = [];
+
   if (player2.turn === true) {
     player1.board.receiveAttack(randomAIAttack());
+    if (player1.board.allShipsSunk()) {
+      console.log("You lose");
+    }
     console.log("rukaj");
     player2.turn = false;
   }

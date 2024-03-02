@@ -1,7 +1,7 @@
 import Square from "./square";
 import Ship from "./ship";
 import ShipImg from "./shipWithImage";
-import isGameOver from "./isGameOver";
+import isGameOver from "./gameOver";
 
 export default class Gameboard {
   constructor(name) {
