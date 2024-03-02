@@ -1,6 +1,7 @@
 import Square from "./square";
 import Ship from "./ship";
 import ShipImg from "./shipWithImage";
+import isGameOver from "./isGameOver";
 
 export default class Gameboard {
   constructor(name) {
@@ -191,8 +192,17 @@ export default class Gameboard {
         console.log("Hit!");
         resultField.style.borderColor = "red";
         result.ship.hits++;
+
         result.ship.isSunk();
-        this.allShipsSunk();
+        if (this.allShipsSunk()) {
+          console.log(this.ships);
+          if (this.name === "player2") {
+            console.log("You win!");
+          } else {
+            console.log("You lose");
+          }
+        }
+        // this.allShipsSunk();
       } else {
         console.log("Miss!");
         resultField.style.backgroundColor = "red";
@@ -201,9 +211,7 @@ export default class Gameboard {
   }
 
   allShipsSunk() {
-    console.log(this.ships);
-    let gameOver = this.ships.every((ship) => ship.sunk === true);
-    if (gameOver === true) {
+    if (this.ships.every((ship) => ship.sunk === true)) {
       return true;
     }
   }
@@ -211,6 +219,9 @@ export default class Gameboard {
   // original
   paint() {
     const gameboardsDiv = document.getElementById("gameboard");
+    const playerPanel = document.createElement("div");
+    const playerName = document.createElement("h3");
+    playerName.setAttribute("id", "playerName");
     const visualBoard = document.createElement("div");
     visualBoard.id = this.name;
     for (let n = 0; n < this.board.length; n++) {
@@ -220,7 +231,9 @@ export default class Gameboard {
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);
     }
-    gameboardsDiv.insertAdjacentElement("afterbegin", visualBoard);
+    playerPanel.appendChild(playerName);
+    playerPanel.appendChild(visualBoard);
+    gameboardsDiv.insertAdjacentElement("afterbegin", playerPanel);
     // gameboardsDiv.append(visualBoard);
   }
 
@@ -241,6 +254,9 @@ export default class Gameboard {
 
   paintAI() {
     const gameboardsDiv = document.getElementById("gameboard");
+    const aiPanel = document.createElement("div");
+    const aiName = document.createElement("h3");
+    aiName.setAttribute("id", "aiName");
     const visualBoard = document.createElement("div");
     visualBoard.id = this.name;
 
@@ -268,7 +284,9 @@ export default class Gameboard {
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);
     }
-    gameboardsDiv.append(visualBoard);
+    aiPanel.appendChild(aiName);
+    aiPanel.appendChild(visualBoard);
+    gameboardsDiv.append(aiPanel);
   }
 }
 
