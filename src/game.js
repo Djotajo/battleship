@@ -133,6 +133,25 @@ export default function game() {
   // dialog kraj
 
   const modalLog = document.getElementById("caption");
+  const shipDirectionButton = document.getElementById("shipDirectionButton");
+
+  let shipDirection = shipDirectionButton.innerText;
+
+  shipDirectionButton.addEventListener("click", () => {
+    changeDirection(shipDirectionButton.innerText);
+  });
+
+  function changeDirection(direction) {
+    if (direction === "Horizontal") {
+      shipDirectionButton.innerText = "Vertical";
+      shipDirection = shipDirectionButton.innerText;
+      console.log(shipDirection);
+    } else {
+      shipDirectionButton.innerText = "Horizontal";
+      shipDirection = shipDirectionButton.innerText;
+      console.log(shipDirection);
+    }
+  }
 
   let board2 = document.querySelectorAll("#player2 > button");
 
@@ -215,15 +234,28 @@ export default function game() {
   function checkFree(button, length) {
     let defCoords = button.innerHTML;
     let free = undefined;
-    for (let n = 0; n < length; n++) {
-      let newButton = document.getElementById(
-        `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
-      );
-      if (newButton.classList.contains("shipped")) {
-        free = false;
-        return free;
+    if (shipDirection === "Horizontal") {
+      for (let n = 0; n < length; n++) {
+        let newButton = document.getElementById(
+          `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+        );
+        if (newButton.classList.contains("shipped")) {
+          free = false;
+          return free;
+        }
+        free = true;
       }
-      free = true;
+    } else if (shipDirection === "Vertical") {
+      for (let n = 0; n < length; n++) {
+        let newButton = document.getElementById(
+          `player1_${Number(defCoords[0]) + n}${defCoords[1]}${defCoords[2]}`
+        );
+        if (newButton.classList.contains("shipped")) {
+          free = false;
+          return free;
+        }
+        free = true;
+      }
     }
     return free;
   }
@@ -233,6 +265,7 @@ export default function game() {
     button.addEventListener("mouseover", (e) => {
       if (currentShip === undefined) {
       } else if (
+        shipDirection === "Horizontal" &&
         Number(defCoords[2]) + currentShip.length <= 10 &&
         checkFree(button, currentShip.length) === true
       ) {
@@ -246,14 +279,42 @@ export default function game() {
             newButton.style.backgroundColor = "blue";
           }
         }
+      } else if (
+        shipDirection === "Vertical" &&
+        Number(defCoords[0]) + currentShip.length <= 10 &&
+        checkFree(button, currentShip.length) === true
+      ) {
+        for (let n = 0; n < currentShip.length; n++) {
+          let newButton = document.getElementById(
+            `player1_${Number(defCoords[0]) + n}${defCoords[1]}${defCoords[2]}`
+          );
+          if (newButton.classList.contains("shipped")) {
+            newButton.style.backgroundColor = "white";
+          } else {
+            newButton.style.backgroundColor = "blue";
+          }
+        }
       }
     });
     button.addEventListener("mouseout", (e) => {
       if (currentShip === undefined) {
-      } else if (Number(defCoords[2]) + currentShip.length <= 10) {
+      } else if (
+        shipDirection === "Horizontal" &&
+        Number(defCoords[2]) + currentShip.length <= 10
+      ) {
         for (let n = 0; n < currentShip.length; n++) {
           let newButton = document.getElementById(
             `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+          );
+          newButton.style.backgroundColor = "white";
+        }
+      } else if (
+        shipDirection === "Vertical" &&
+        Number(defCoords[0]) + currentShip.length <= 10
+      ) {
+        for (let n = 0; n < currentShip.length; n++) {
+          let newButton = document.getElementById(
+            `player1_${Number(defCoords[0]) + n}${defCoords[1]}${defCoords[2]}`
           );
           newButton.style.backgroundColor = "white";
         }
@@ -263,7 +324,20 @@ export default function game() {
       if (currentShip === undefined) {
       } else if (
         currentShip != undefined &&
+        shipDirection === "Horizontal" &&
         Number(defCoords[2]) + currentShip.length <= 10 &&
+        checkFree(button, currentShip.length) === true
+      ) {
+        let newButton = document.getElementById(
+          `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2])}`
+        );
+        addShipToField(newButton);
+        currentShip = undefined;
+        checkConfirmBtn(player1.board);
+      } else if (
+        currentShip != undefined &&
+        shipDirection === "Vertical" &&
+        Number(defCoords[0]) + currentShip.length <= 10 &&
         checkFree(button, currentShip.length) === true
       ) {
         let newButton = document.getElementById(
@@ -276,22 +350,41 @@ export default function game() {
     });
   }
 
-  function drawShips(fields, length) {
+  function drawShips(fields, length, shipDirection) {
     let defCoords = fields.innerHTML;
-    for (let n = 0; n < length; n++) {
-      let shipField = document.getElementById(
-        `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
-      );
+    if (shipDirection === "Horizontal") {
+      for (let n = 0; n < length; n++) {
+        let shipField = document.getElementById(
+          `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+        );
 
-      const found = player1.board.board.find(
-        (element) =>
-          element.name === `${defCoords[0]}${Number(defCoords[2]) + n}`
-      );
-      shipField.classList.add("shipped");
-      shipField.style.backgroundImage = `url(${found.img})`;
-      // ideja
-      // shipField.disabled = true;
-      console.log(found);
+        const found = player1.board.board.find(
+          (element) =>
+            element.name === `${defCoords[0]}${Number(defCoords[2]) + n}`
+        );
+        shipField.classList.add("shipped");
+        shipField.style.backgroundImage = `url(${found.img})`;
+        // ideja
+        // shipField.disabled = true;
+        console.log(found);
+      }
+    } else if (shipDirection === "Vertical") {
+      for (let n = 0; n < length; n++) {
+        let shipField = document.getElementById(
+          `player1_${Number(defCoords[0]) + n}${defCoords[1]}${defCoords[2]}`
+        );
+
+        const found = player1.board.board.find(
+          (element) =>
+            element.name === `${Number(defCoords[0]) + n}${defCoords[2]}`
+        );
+        shipField.classList.add("shipped");
+        shipField.classList.add("rotated");
+        shipField.style.backgroundImage = `url(${found.img})`;
+        // ideja
+        // shipField.disabled = true;
+        console.log(found);
+      }
     }
   }
   // test kopija
@@ -303,10 +396,11 @@ export default function game() {
       currentShip.name,
       currentShip.length,
       currentShip.img,
-      testCoordinates
+      testCoordinates,
+      shipDirection
     );
     currentButton.disabled = true;
-    drawShips(field, currentShip.length);
+    drawShips(field, currentShip.length, shipDirection);
     modalLog.innerText = "Choose your ship";
     return;
   }

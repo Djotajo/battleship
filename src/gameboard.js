@@ -72,17 +72,31 @@ export default class Gameboard {
   // }
 
   // original
-  placeImgShipPlayer(name, length, img, field) {
+  placeImgShipPlayer(name, length, img, field, shipDirection) {
     let ship = new ShipImg(name, length, img);
-    for (let a = 0; a < length; a++) {
-      let startPosition = this.board.filter(
-        (e) =>
-          e.coordinates.toString() ==
-          `${field[0].toString()},${(field[1] + a).toString()}`
-      )[0];
-      startPosition.ship = ship;
-      startPosition.img = `${ship.img}${a}.png`;
-      console.log(startPosition);
+    if (shipDirection === "Horizontal") {
+      for (let a = 0; a < length; a++) {
+        let startPosition = this.board.filter(
+          (e) =>
+            e.coordinates.toString() ==
+            `${field[0].toString()},${(field[1] + a).toString()}`
+        )[0];
+        startPosition.ship = ship;
+        startPosition.img = `${ship.img}${a}.png`;
+        console.log(startPosition);
+      }
+    } else if (shipDirection === "Vertical") {
+      for (let a = 0; a < length; a++) {
+        let startPosition = this.board.filter(
+          (e) =>
+            e.coordinates.toString() ==
+            `${(field[0] + a).toString()},${field[1].toString()}`
+        )[0];
+        startPosition.ship = ship;
+        startPosition.img = `${ship.img}${a}.png`;
+        startPosition.orientation = "vertical";
+        console.log(startPosition);
+      }
     }
     this.ships.push(ship);
   }
@@ -227,6 +241,9 @@ export default class Gameboard {
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
       visualField.innerHTML = this.board[n].coordinates;
+      if (this.board[n].orientation === "vertical") {
+        visualField.classList.add("rotated");
+      }
       visualField.style.backgroundImage = `url(${this.board[n].img})`;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);

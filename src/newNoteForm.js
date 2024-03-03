@@ -6,6 +6,7 @@ export default function newNoteForm() {
             <p>
                 <label for="text"></label>
                 <div id="caption">Choose your ship</div>
+                <button id="shipDirectionButton">Horizontal</button>
                 <div id="text"></div>
             </p>
                 <div>
