@@ -219,7 +219,8 @@ export default class Gameboard {
         // this.allShipsSunk();
       } else {
         console.log("Miss!");
-        resultField.style.backgroundColor = "red";
+        resultField.classList.add("dot");
+        // resultField.style.backgroundColor = "red";
       }
     }
   }
@@ -244,7 +245,10 @@ export default class Gameboard {
       if (this.board[n].orientation === "vertical") {
         visualField.classList.add("rotated");
       }
-      visualField.style.backgroundImage = `url(${this.board[n].img})`;
+      if (this.board[n].img != null) {
+        visualField.style.backgroundImage = `url(${this.board[n].img})`;
+      }
+
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);
     }

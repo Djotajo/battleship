@@ -15,10 +15,17 @@
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
-  background-color: aquamarine;
   width: 80%;
   aspect-ratio: 1/1;
   padding: 0;
+}
+
+#gameboard > div > div .dot {
+  background-image: radial-gradient(#e53935 30%, white 30%);
+  /* opacity: 0.5; */
+  /* width: 75%;
+  height: 75%; */
+  pointer-events: none;
 }
 
 /* body {
