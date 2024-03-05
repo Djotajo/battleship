@@ -14,7 +14,7 @@
 #gameboard > div > div {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   width: 80%;
   aspect-ratio: 1/1;
   padding: 0;
@@ -23,10 +23,42 @@
 #gameboard > div > div .dot {
   background-image: radial-gradient(#e53935 30%, white 30%);
   /* opacity: 0.5; */
-  /* width: 75%;
-  height: 75%; */
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
+
+#gameboard > div > div .miss {
+  background-image: radial-gradient(#0817eb 30%, white 30%);
+  /* opacity: 0.5; */
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#gameboard > div > div img {
+  /* background-image: radial-gradient(#0817eb 30%, white 30%); */
+  /* opacity: 0.5; */
+  display: inline-block;
+  max-height: 80%;
+  object-fit: contain;
+  max-width: 100%;
+  /* width: 50%;
+  height: 50%; */
+  /* transform: rotate(90deg); */
+  pointer-events: none;
+}
+
+#gameboard > div > div .hit {
+  background-image: radial-gradient(#be0606 30%, white 30%);
+  /* opacity: 0.5; */
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* <a target="_blank" href="https://icons8.com/icon/QV5JEtrTP6nH/fire">Fire</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> */
 
 /* body {
   display: flex;
@@ -62,6 +94,7 @@
   width: auto;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  box-sizing: border-box;
 }
 
 #gameboard > div :hover {

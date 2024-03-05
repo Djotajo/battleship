@@ -204,7 +204,11 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
+        const image = document.createElement("img");
+        image.src = "../assets/flame.png";
+        resultField.innerHTML = '<img src="../assets/flame.png">';
         resultField.style.borderColor = "red";
+        resultField.classList.add("miss");
         result.ship.hits++;
 
         result.ship.isSunk();
@@ -219,7 +223,7 @@ export default class Gameboard {
         // this.allShipsSunk();
       } else {
         console.log("Miss!");
-        resultField.classList.add("dot");
+        resultField.classList.add("miss");
         // resultField.style.backgroundColor = "red";
       }
     }
