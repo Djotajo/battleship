@@ -204,11 +204,16 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
-        const image = document.createElement("img");
-        image.src = "../assets/flame.png";
-        resultField.innerHTML = '<img src="../assets/flame.png">';
+        resultField.innerHTML =
+          '<img src="../assets/flame.png" class="flameImage">';
+        const flameImage = resultField.querySelector(".flameImage");
+        if (resultField.classList.contains("rotated")) {
+          console.log("sta se i radi");
+          flameImage.classList.add("rotatedImage");
+        }
+
         resultField.style.borderColor = "red";
-        resultField.classList.add("miss");
+        // resultField.classList.add("miss");
         result.ship.hits++;
 
         result.ship.isSunk();
@@ -288,10 +293,10 @@ export default class Gameboard {
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
       visualField.addEventListener("click", (e) => {
-        this.receiveAttack([this.board[n].coordinates]);
         if (this.board[n].orientation === "vertical") {
           visualField.classList.add("rotated");
         }
+        this.receiveAttack([this.board[n].coordinates]);
         visualField.disabled = true;
         if (this.board[n].ship === null) {
           visualField.style.backgroundColor = "red";

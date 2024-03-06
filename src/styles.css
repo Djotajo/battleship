@@ -42,7 +42,7 @@
   display: inline-block;
   max-height: 80%;
   object-fit: contain;
-  max-width: 100%;
+  max-width: 80%;
   /* width: 50%;
   height: 50%; */
   /* transform: rotate(90deg); */
@@ -166,6 +166,10 @@ form {
 
 .rotated {
   transform: rotate(90deg);
+}
+
+.rotatedImage {
+  transform: rotate(270deg);
 }
 
 .red {
