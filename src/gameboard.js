@@ -113,6 +113,7 @@ export default class Gameboard {
         )[0];
         startPosition.ship = ship;
         startPosition.img = `${ship.img}${a}.png`;
+        ship.coordinates.push(startPosition.coordinates);
       }
     } else {
       let field = this.verticalFieldRandomizer(length);
@@ -125,37 +126,40 @@ export default class Gameboard {
         startPosition.ship = ship;
         startPosition.img = `${ship.img}${a}.png`;
         startPosition.orientation = "vertical";
+        ship.coordinates.push(startPosition.coordinates);
       }
     }
     this.ships.push(ship);
   }
 
-  placeShipAI(name, length) {
-    let ship = new Ship(name, length);
-    if (Math.random() < 0.5) {
-      let field = this.horizontalFieldRandomizer(length);
-      for (let a = 0; a < length; a++) {
-        let startPosition = this.board.filter(
-          (e) =>
-            e.coordinates.toString() ==
-            `${field[0].toString()},${(field[1] + a).toString()}`
-        )[0];
-        startPosition.ship = ship;
-      }
-    } else {
-      let field = this.verticalFieldRandomizer(length);
-      for (let a = 0; a < length; a++) {
-        let startPosition = this.board.filter(
-          (e) =>
-            e.coordinates.toString() ==
-            `${(field[0] + a).toString()},${field[1].toString()}`
-        )[0];
-        startPosition.ship = ship;
-        startPosition.orientation = "vertical";
-      }
-    }
-    this.ships.push(ship);
-  }
+  // placeShipAI(name, length) {
+  //   let ship = new Ship(name, length);
+  //   if (Math.random() < 0.5) {
+  //     let field = this.horizontalFieldRandomizer(length);
+  //     for (let a = 0; a < length; a++) {
+  //       let startPosition = this.board.filter(
+  //         (e) =>
+  //           e.coordinates.toString() ==
+  //           `${field[0].toString()},${(field[1] + a).toString()}`
+  //       )[0];
+  //       startPosition.ship = ship;
+  //       ship.coordinates.push(startPosition);
+  //     }
+  //   } else {
+  //     let field = this.verticalFieldRandomizer(length);
+  //     for (let a = 0; a < length; a++) {
+  //       let startPosition = this.board.filter(
+  //         (e) =>
+  //           e.coordinates.toString() ==
+  //           `${(field[0] + a).toString()},${field[1].toString()}`
+  //       )[0];
+  //       startPosition.ship = ship;
+  //       startPosition.orientation = "vertical";
+  //       ship.coordinates.push(startPosition);
+  //     }
+  //   }
+  //   this.ships.push(ship);
+  // }
 
   horizontalFieldRandomizer(length) {
     let fields = [
@@ -292,26 +296,44 @@ export default class Gameboard {
 
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
+      visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualField.addEventListener("click", (e) => {
         if (this.board[n].orientation === "vertical") {
           visualField.classList.add("rotated");
         }
         this.receiveAttack([this.board[n].coordinates]);
         visualField.disabled = true;
-        if (this.board[n].ship === null) {
-          visualField.style.backgroundColor = "red";
-        } else if (this.board[n].hit === true) {
-          // visualField.style.backgroundColor = "red";
+        if (this.board[n].ship && this.board[n].ship.sunk === true) {
+          console.log(this.board[n].ship);
+          console.log(this.board[n].ship.coordinates);
+          this.board[n].ship.coordinates.forEach((element) => {
+            let shipDown = document.getElementById(`player2_${element}`);
+            let numbers = `${element[0]}${element[1]}`;
+            shipDown.style.backgroundImage = `url(${
+              this.board[Number(numbers)].img
+            })`;
+
+            // console.log(numbers);
+            // console.log(`player2_${element}`);
+            // console.log(`player2_${Number(numbers)}`);
+          });
+          console.log(n);
           visualField.style.backgroundImage = `url(${this.board[n].img})`;
-        } else {
-          visualField.style.backgroundColor = "blue";
         }
+        // if (this.board[n].ship === null) {
+        //   visualField.style.backgroundColor = "red";
+        // } else if (this.board[n].hit === true) {
+        //   // visualField.style.backgroundColor = "red";
+        //   visualField.style.backgroundImage = `url(${this.board[n].img})`;
+        // } else {
+        //   visualField.style.backgroundColor = "blue";
+        // }
       });
       visualField.innerHTML = this.board[n].coordinates;
       // if (this.board[n].hit === true) {
       //   visualField.style.backgroundColor = "red";
       // }
-      visualField.id = `${this.name}_${this.board[n].coordinates}`;
+
       visualBoard.appendChild(visualField);
     }
     aiPanel.appendChild(aiName);

@@ -5,6 +5,7 @@ export default class ShipImg {
     this.hits = 0;
     this.sunk = false;
     this.img = img;
+    this.coordinates = [];
   }
 
   isHit() {

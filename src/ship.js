@@ -1,18 +1,19 @@
-export default class Ship {
-  constructor(name, length) {
-    this.name = name;
-    this.length = length;
-    this.hits = 0;
-    this.sunk = false;
-  }
+// export default class Ship {
+//   constructor(name, length) {
+//     this.name = name;
+//     this.length = length;
+//     this.hits = 0;
+//     this.sunk = false;
+//     this.coordinates = [];
+//   }
 
-  isHit() {
-    return this.hits++;
-  }
+//   isHit() {
+//     return this.hits++;
+//   }
 
-  isSunk() {
-    return this.hits === this.length
-      ? (this.sunk = true) && console.log("Sunk")
-      : (this.sunk = false);
-  }
-}
+//   isSunk() {
+//     return this.hits === this.length
+//       ? (this.sunk = true) && console.log("Sunk")
+//       : (this.sunk = false);
+//   }
+// }
