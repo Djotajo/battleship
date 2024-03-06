@@ -1,7 +1,7 @@
 import Square from "./square";
-import Ship from "./ship";
+// import Ship from "./ship";
 import ShipImg from "./shipWithImage";
-import isGameOver from "./gameOver";
+// import isGameOver from "./gameOver";
 
 export default class Gameboard {
   constructor(name) {
@@ -18,46 +18,9 @@ export default class Gameboard {
     }
   }
 
-  placeShip(name, length, field) {
-    let ship = new Ship(name, length);
-    let fieldsArray = [];
-    for (let a = 0; a < length; a++) {
-      let startPosition = this.board.filter(
-        (e) =>
-          e.coordinates.toString() ==
-          `${field[0].toString()},${(field[1] + a).toString()}`
-      )[0];
-      startPosition.ship = ship;
-    }
-    this.ships.push(ship);
-  }
-
-  placeShipPlayer(name, length, field) {
-    let ship = new Ship(name, length);
-    for (let a = 0; a < length; a++) {
-      let startPosition = this.board.filter(
-        (e) =>
-          e.coordinates.toString() ==
-          `${field[0].toString()},${(field[1] + a).toString()}`
-      )[0];
-      startPosition.ship = ship;
-    }
-    this.ships.push(ship);
-  }
-
-  // placeImgShipPlayer(name, length, img, field) {
-  //   let ship = new ShipImg(name, length, img);
-  //   for (let a = 0; a < length; a++) {
-  //     let startPosition = this.board.filter(
-  //       (e) =>
-  //         e.coordinates.toString() ==
-  //         `${field[0].toString()},${(field[1] + a).toString()}`
-  //     )[0];
-  //     if (startPosition.ship != undefined) {
-  //       alert("Can't place this ship here capt'n");
-  //       return null;
-  //     }
-  //   }
+  // placeShip(name, length, field) {
+  //   let ship = new Ship(name, length);
+  //   let fieldsArray = [];
   //   for (let a = 0; a < length; a++) {
   //     let startPosition = this.board.filter(
   //       (e) =>
@@ -65,8 +28,19 @@ export default class Gameboard {
   //         `${field[0].toString()},${(field[1] + a).toString()}`
   //     )[0];
   //     startPosition.ship = ship;
-  //     startPosition.img = `${ship.img}${a}.png`;
-  //     console.log(startPosition);
+  //   }
+  //   this.ships.push(ship);
+  // }
+
+  // placeShipPlayer(name, length, field) {
+  //   let ship = new Ship(name, length);
+  //   for (let a = 0; a < length; a++) {
+  //     let startPosition = this.board.filter(
+  //       (e) =>
+  //         e.coordinates.toString() ==
+  //         `${field[0].toString()},${(field[1] + a).toString()}`
+  //     )[0];
+  //     startPosition.ship = ship;
   //   }
   //   this.ships.push(ship);
   // }
@@ -132,35 +106,6 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
-  // placeShipAI(name, length) {
-  //   let ship = new Ship(name, length);
-  //   if (Math.random() < 0.5) {
-  //     let field = this.horizontalFieldRandomizer(length);
-  //     for (let a = 0; a < length; a++) {
-  //       let startPosition = this.board.filter(
-  //         (e) =>
-  //           e.coordinates.toString() ==
-  //           `${field[0].toString()},${(field[1] + a).toString()}`
-  //       )[0];
-  //       startPosition.ship = ship;
-  //       ship.coordinates.push(startPosition);
-  //     }
-  //   } else {
-  //     let field = this.verticalFieldRandomizer(length);
-  //     for (let a = 0; a < length; a++) {
-  //       let startPosition = this.board.filter(
-  //         (e) =>
-  //           e.coordinates.toString() ==
-  //           `${(field[0] + a).toString()},${field[1].toString()}`
-  //       )[0];
-  //       startPosition.ship = ship;
-  //       startPosition.orientation = "vertical";
-  //       ship.coordinates.push(startPosition);
-  //     }
-  //   }
-  //   this.ships.push(ship);
-  // }
-
   horizontalFieldRandomizer(length) {
     let fields = [
       Math.floor(Math.random() * 10),
@@ -212,10 +157,8 @@ export default class Gameboard {
           '<img src="../assets/flame.png" class="flameImage">';
         const flameImage = resultField.querySelector(".flameImage");
         if (resultField.classList.contains("rotated")) {
-          console.log("sta se i radi");
           flameImage.classList.add("rotatedImage");
         }
-
         resultField.style.borderColor = "red";
         // resultField.classList.add("miss");
         result.ship.hits++;
@@ -229,11 +172,9 @@ export default class Gameboard {
             console.log("You lose");
           }
         }
-        // this.allShipsSunk();
       } else {
         console.log("Miss!");
         resultField.classList.add("miss");
-        // resultField.style.backgroundColor = "red";
       }
     }
   }
@@ -268,7 +209,6 @@ export default class Gameboard {
     playerPanel.appendChild(playerName);
     playerPanel.appendChild(visualBoard);
     gameboardsDiv.insertAdjacentElement("afterbegin", playerPanel);
-    // gameboardsDiv.append(visualBoard);
   }
 
   paintModal() {
@@ -280,7 +220,6 @@ export default class Gameboard {
       visualField.innerHTML = this.board[n].coordinates;
       visualField.style.backgroundImage = `url(${this.board[n].img})`;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
-      // visualField.style.backgroundColor = "blue";
       visualBoard.appendChild(visualField);
     }
     return visualBoard;
@@ -304,36 +243,17 @@ export default class Gameboard {
         this.receiveAttack([this.board[n].coordinates]);
         visualField.disabled = true;
         if (this.board[n].ship && this.board[n].ship.sunk === true) {
-          console.log(this.board[n].ship);
-          console.log(this.board[n].ship.coordinates);
           this.board[n].ship.coordinates.forEach((element) => {
             let shipDown = document.getElementById(`player2_${element}`);
             let numbers = `${element[0]}${element[1]}`;
             shipDown.style.backgroundImage = `url(${
               this.board[Number(numbers)].img
             })`;
-
-            // console.log(numbers);
-            // console.log(`player2_${element}`);
-            // console.log(`player2_${Number(numbers)}`);
           });
-          console.log(n);
           visualField.style.backgroundImage = `url(${this.board[n].img})`;
         }
-        // if (this.board[n].ship === null) {
-        //   visualField.style.backgroundColor = "red";
-        // } else if (this.board[n].hit === true) {
-        //   // visualField.style.backgroundColor = "red";
-        //   visualField.style.backgroundImage = `url(${this.board[n].img})`;
-        // } else {
-        //   visualField.style.backgroundColor = "blue";
-        // }
       });
       visualField.innerHTML = this.board[n].coordinates;
-      // if (this.board[n].hit === true) {
-      //   visualField.style.backgroundColor = "red";
-      // }
-
       visualBoard.appendChild(visualField);
     }
     aiPanel.appendChild(aiName);
@@ -341,52 +261,3 @@ export default class Gameboard {
     gameboardsDiv.append(aiPanel);
   }
 }
-
-// console.log(e.target.getBoundingClientRect());
-
-// placeShipAI(name, length) {
-//   let ship = new Ship(name, length);
-//   let field = this.verticalFieldRandomizer(length);
-//   for (let a = 0; a < length; a++) {
-//     let startPosition = this.board.filter(
-//       (e) =>
-//         e.coordinates.toString() ==
-//         `${field[0].toString()},${(field[1] + a).toString()}`
-//     )[0];
-//     startPosition.ship = ship;
-//   }
-//   this.ships.push(ship);
-// }
-
-// original
-// paint() {
-//   const gameboardsDiv = document.getElementById("gameboard");
-//   const visualBoard = document.createElement("div");
-//   visualBoard.id = this.name;
-
-//   for (let n = 0; n < this.board.length; n++) {
-//     let visualField = document.createElement("button");
-// visualField.addEventListener("click", (e) => {
-//   this.receiveAttack([this.board[n].coordinates]);
-//   // visualField.style.backgroundColor = "red";
-//   if (this.board[n].orientation === "vertical") {
-//     visualField.classList.add("rotated");
-//   }
-//   visualField.disabled = true;
-//   if (this.board[n].ship === null) {
-//     visualField.style.backgroundColor = "red";
-//   } else if (this.board[n].hit === true) {
-//     // visualField.style.backgroundColor = "red";
-//     visualField.style.backgroundImage = `url(${this.board[n].img})`;
-//   } else {
-//     visualField.style.backgroundColor = "blue";
-//   }
-// });
-// visualField.innerHTML = this.board[n].coordinates;
-// visualField.style.backgroundImage = `url(${this.board[n].img})`;
-// visualField.id = `${this.name}_${this.board[n].coordinates}`;
-// visualField.style.backgroundColor = "blue";
-//   visualBoard.appendChild(visualField);
-// }
-// gameboardsDiv.append(visualBoard);
-// }

@@ -233,11 +233,14 @@ export default function game() {
 
   function checkFree(button, length) {
     let defCoords = button.innerHTML;
+    let butId = button.id;
+    console.log(defCoords);
+    console.log(butId.slice(-1));
     let free = undefined;
     if (shipDirection === "Horizontal") {
       for (let n = 0; n < length; n++) {
         let newButton = document.getElementById(
-          `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+          `${butId.slice(0, -1)}${Number(butId.slice(-1)) + n}`
         );
         if (newButton.classList.contains("shipped")) {
           free = false;
