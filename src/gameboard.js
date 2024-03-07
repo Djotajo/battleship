@@ -159,7 +159,6 @@ export default class Gameboard {
         if (resultField.classList.contains("rotated")) {
           flameImage.classList.add("rotatedImage");
         }
-        resultField.style.borderColor = "red";
         // resultField.classList.add("miss");
         result.ship.hits++;
 
