@@ -353,45 +353,36 @@ export default function game() {
   }
 
   function drawShips(fields, length, shipDirection) {
-    let defCoords = fields.innerHTML;
+    let butId = fields.id;
     if (shipDirection === "Horizontal") {
       for (let n = 0; n < length; n++) {
         let shipField = document.getElementById(
-          `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
+          `${butId.slice(0, -1)}${Number(butId.slice(-1)) + n}`
         );
-
         const found = player1.board.board.find(
-          (element) =>
-            element.name === `${defCoords[0]}${Number(defCoords[2]) + n}`
+          (element) => element.name === `${butId[8]}${Number(butId[10]) + n}`
         );
         shipField.classList.add("shipped");
         shipField.style.backgroundImage = `url(${found.img})`;
-        // ideja
-        // shipField.disabled = true;
-        console.log(found);
       }
     } else if (shipDirection === "Vertical") {
       for (let n = 0; n < length; n++) {
-        let shipField = document.getElementById(
-          `player1_${Number(defCoords[0]) + n}${defCoords[1]}${defCoords[2]}`
-        );
-
+        let replacedNum = [...butId];
+        replacedNum[8] = Number(replacedNum[8]) + n;
+        let shipField = document.getElementById(`${replacedNum.join("")}`);
         const found = player1.board.board.find(
-          (element) =>
-            element.name === `${Number(defCoords[0]) + n}${defCoords[2]}`
+          (element) => element.name === `${Number(butId[8]) + n}${butId[10]}`
         );
         shipField.classList.add("shipped");
         shipField.classList.add("rotated");
         shipField.style.backgroundImage = `url(${found.img})`;
-        // ideja
-        // shipField.disabled = true;
-        console.log(found);
       }
     }
   }
   // test kopija
   function addShipToField(field) {
-    let testCoordinates = field.innerHTML
+    let testCoordinates = field.id
+      .slice(8)
       .split(",")
       .map((element) => Number(element));
     player1.board.placeImgShipPlayer(

@@ -195,7 +195,7 @@ export default class Gameboard {
     visualBoard.id = this.name;
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
-      visualField.innerHTML = this.board[n].coordinates;
+      // visualField.innerHTML = this.board[n].coordinates;
       if (this.board[n].orientation === "vertical") {
         visualField.classList.add("rotated");
       }
@@ -217,7 +217,7 @@ export default class Gameboard {
 
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
-      visualField.innerHTML = this.board[n].coordinates;
+      // visualField.innerHTML = this.board[n].coordinates;
       visualField.style.backgroundImage = `url(${this.board[n].img})`;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);
@@ -253,7 +253,7 @@ export default class Gameboard {
           visualField.style.backgroundImage = `url(${this.board[n].img})`;
         }
       });
-      visualField.innerHTML = this.board[n].coordinates;
+      // visualField.innerHTML = this.board[n].coordinates;
       visualBoard.appendChild(visualField);
     }
     aiPanel.appendChild(aiName);
