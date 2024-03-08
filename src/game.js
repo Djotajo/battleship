@@ -306,7 +306,7 @@ export default function game() {
           let newButton = document.getElementById(
             `${butId.slice(0, -1)}${Number(butId.slice(-1)) + n}`
           );
-          newButton.style.backgroundColor = "white";
+          newButton.style.backgroundColor = "rgb(239, 239, 239)";
         }
       } else if (
         shipDirection === "Vertical" &&
@@ -316,7 +316,7 @@ export default function game() {
           let replacedNum = [...butId];
           replacedNum[8] = Number(replacedNum[8]) + n;
           let newButton = document.getElementById(`${replacedNum.join("")}`);
-          newButton.style.backgroundColor = "white";
+          newButton.style.backgroundColor = "rgb(239, 239, 239)";
         }
       }
     });
