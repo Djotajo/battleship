@@ -374,8 +374,10 @@ export default function game() {
           (element) => element.name === `${Number(butId[8]) + n}${butId[10]}`
         );
         shipField.classList.add("shipped");
-        shipField.classList.add("rotated");
-        shipField.style.backgroundImage = `url(${found.img})`;
+        shipField.style.backgroundImage = `url(${found.img.slice(
+          0,
+          10
+        )}rotated${found.img.slice(10)})`;
       }
     }
   }
@@ -404,41 +406,3 @@ export default function game() {
 // shipButton3.innerHTML = "Submarine";
 // shipButton4.innerHTML = "Cruiser";
 // shipButton5.innerHTML = "Gunboat";
-
-// function drawShips(fields, length, shipDirection) {
-//   let defCoords = fields.innerHTML;
-//   if (shipDirection === "Horizontal") {
-//     for (let n = 0; n < length; n++) {
-//       let shipField = document.getElementById(
-//         `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2]) + n}`
-//       );
-
-//       const found = player1.board.board.find(
-//         (element) =>
-//           element.name === `${defCoords[0]}${Number(defCoords[2]) + n}`
-//       );
-//       shipField.classList.add("shipped");
-//       shipField.style.backgroundImage = `url(${found.img})`;
-//       // ideja
-//       // shipField.disabled = true;
-//       console.log(found);
-//     }
-//   } else if (shipDirection === "Vertical") {
-//     for (let n = 0; n < length; n++) {
-//       let shipField = document.getElementById(
-//         `player1_${Number(defCoords[0]) + n}${defCoords[1]}${defCoords[2]}`
-//       );
-
-//       const found = player1.board.board.find(
-//         (element) =>
-//           element.name === `${Number(defCoords[0]) + n}${defCoords[2]}`
-//       );
-//       shipField.classList.add("shipped");
-//       shipField.classList.add("rotated");
-//       shipField.style.backgroundImage = `url(${found.img})`;
-//       // ideja
-//       // shipField.disabled = true;
-//       console.log(found);
-//     }
-//   }
-// }

@@ -156,10 +156,6 @@ export default class Gameboard {
         resultField.innerHTML =
           '<img src="../assets/flame.png" class="flameImage">';
         const flameImage = resultField.querySelector(".flameImage");
-        if (resultField.classList.contains("rotated")) {
-          flameImage.classList.add("rotatedImage");
-        }
-        // resultField.classList.add("miss");
         result.ship.hits++;
 
         result.ship.isSunk();
@@ -196,9 +192,11 @@ export default class Gameboard {
       let visualField = document.createElement("button");
       // visualField.innerHTML = this.board[n].coordinates;
       if (this.board[n].orientation === "vertical") {
-        visualField.classList.add("rotated");
-      }
-      if (this.board[n].img != null) {
+        visualField.style.backgroundImage = `url(${this.board[n].img.slice(
+          0,
+          10
+        )}rotated${this.board[n].img.slice(10)})`;
+      } else if (this.board[n].img != null) {
         visualField.style.backgroundImage = `url(${this.board[n].img})`;
       }
 
@@ -216,7 +214,6 @@ export default class Gameboard {
 
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
-      // visualField.innerHTML = this.board[n].coordinates;
       visualField.style.backgroundImage = `url(${this.board[n].img})`;
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualBoard.appendChild(visualField);
@@ -236,23 +233,27 @@ export default class Gameboard {
       let visualField = document.createElement("button");
       visualField.id = `${this.name}_${this.board[n].coordinates}`;
       visualField.addEventListener("click", (e) => {
-        if (this.board[n].orientation === "vertical") {
-          visualField.classList.add("rotated");
-        }
         this.receiveAttack([this.board[n].coordinates]);
         visualField.disabled = true;
         if (this.board[n].ship && this.board[n].ship.sunk === true) {
           this.board[n].ship.coordinates.forEach((element) => {
             let shipDown = document.getElementById(`player2_${element}`);
             let numbers = `${element[0]}${element[1]}`;
-            shipDown.style.backgroundImage = `url(${
-              this.board[Number(numbers)].img
-            })`;
+            if (this.board[n].orientation === "vertical") {
+              shipDown.style.backgroundImage = `url(${this.board[
+                Number(numbers)
+              ].img.slice(0, 10)}rotated${this.board[Number(numbers)].img.slice(
+                10
+              )})`;
+            } else {
+              shipDown.style.backgroundImage = `url(${
+                this.board[Number(numbers)].img
+              })`;
+            }
+            console.log(`url(${this.board[Number(numbers)].img})`);
           });
-          visualField.style.backgroundImage = `url(${this.board[n].img})`;
         }
       });
-      // visualField.innerHTML = this.board[n].coordinates;
       visualBoard.appendChild(visualField);
     }
     aiPanel.appendChild(aiName);
