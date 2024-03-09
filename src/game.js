@@ -73,7 +73,6 @@ export default function game() {
     addNewNote.hidden = true;
     test1.style.display = "none";
     noteForm.reset();
-    console.log(player1.board);
     const player1Name = document.getElementById("playerName");
     player1Name.innerText = `${player1.name}`;
     const player2Name = document.getElementById("aiName");
@@ -102,35 +101,13 @@ export default function game() {
   // player2.board.paintAI();
   player2.board.allShipsSunk();
 
-  const enemyAttacks = [];
-
-  if (player2.turn === true) {
-    player1.board.receiveAttack(randomAIAttack());
-    if (player1.board.allShipsSunk()) {
-      console.log("You lose");
-    }
-    console.log("rukaj");
-    player2.turn = false;
-  }
-  // console.log(isGameOver());
-
-  // let turn2 = document.createElement("button");
-  // turn2.addEventListener("click", (e) => {
-  //   player2.turn = true;
-  //   console.log(player2);
-  // });
-
-  // test1.appendChild(turn2);
-
-  // let turn3 = newNoteForm();
-  // // turn3.addEventListener("click", (e) => {
-  // //   currentTurn(player1, player2);
-  // // });
-  // test1.appendChild(turn3);
-
-  // dialog pocetak
-
-  // dialog kraj
+  // if (player2.turn === true) {
+  //   player1.board.receiveAttack(randomAIAttack());
+  //   if (player1.board.allShipsSunk()) {
+  //     console.log("You lose");
+  //   }
+  //   player2.turn = false;
+  // }
 
   const modalLog = document.getElementById("caption");
   const shipDirectionButton = document.getElementById("shipDirectionButton");
@@ -145,11 +122,8 @@ export default function game() {
     if (direction === "Horizontal") {
       shipDirectionButton.innerText = "Vertical";
       shipDirection = shipDirectionButton.innerText;
-      console.log(shipDirection);
     } else {
       shipDirectionButton.innerText = "Horizontal";
-      shipDirection = shipDirectionButton.innerText;
-      console.log(shipDirection);
     }
   }
 
@@ -328,9 +302,6 @@ export default function game() {
         Number(butId.slice(-1)) + currentShip.length <= 10 &&
         checkFree(button, currentShip.length) === true
       ) {
-        // let newButton = document.getElementById(
-        //   `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2])}`
-        // );
         addShipToField(button);
         currentShip = undefined;
         checkConfirmBtn(player1.board);
@@ -340,11 +311,6 @@ export default function game() {
         Number([...butId][8]) + currentShip.length <= 10 &&
         checkFree(button, currentShip.length) === true
       ) {
-        // let newButton = document.getElementById(
-        //   `player1_${defCoords[0]}${defCoords[1]}${Number(defCoords[2])}`
-        // );
-        // console.log(button);
-        // console.log(newButton);
         addShipToField(button);
         currentShip = undefined;
         checkConfirmBtn(player1.board);

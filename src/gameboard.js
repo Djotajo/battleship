@@ -57,7 +57,6 @@ export default class Gameboard {
         )[0];
         startPosition.ship = ship;
         startPosition.img = `${ship.img}${a}.png`;
-        console.log(startPosition);
       }
     } else if (shipDirection === "Vertical") {
       for (let a = 0; a < length; a++) {
@@ -69,7 +68,6 @@ export default class Gameboard {
         startPosition.ship = ship;
         startPosition.img = `${ship.img}${a}.png`;
         startPosition.orientation = "vertical";
-        console.log(startPosition);
       }
     }
     this.ships.push(ship);
@@ -160,7 +158,6 @@ export default class Gameboard {
 
         result.ship.isSunk();
         if (this.allShipsSunk()) {
-          console.log(this.ships);
           if (this.name === "player2") {
             console.log("You win!");
           } else {
@@ -190,7 +187,6 @@ export default class Gameboard {
     visualBoard.id = this.name;
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
-      // visualField.innerHTML = this.board[n].coordinates;
       if (this.board[n].orientation === "vertical") {
         visualField.style.backgroundImage = `url(${this.board[n].img.slice(
           0,
@@ -250,7 +246,6 @@ export default class Gameboard {
                 this.board[Number(numbers)].img
               })`;
             }
-            console.log(`url(${this.board[Number(numbers)].img})`);
           });
         }
       });
