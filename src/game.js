@@ -1,7 +1,7 @@
 import Player from "./player";
 import firstMove from "./firstMove";
 import Gameboard from "./gameboard";
-import isGameOver from "./gameOver";
+import gameOver from "./gameOver";
 import randomAIAttack from "./randomAIAttack";
 import currentTurn from "./currentTurn";
 import newNoteForm from "./newNoteForm";
@@ -34,7 +34,6 @@ export default function game() {
   const confirmBtn = addNote.querySelector("#confirmBtn");
   const closeBtn = document.querySelector("#closeBtn");
 
-  // const title = document.querySelector("#title");
   const text = document.querySelector("#text");
   const modalShipButtons = document.createElement("div");
   modalShipButtons.classList.add("modalShipButtons");
@@ -365,6 +364,41 @@ export default function game() {
     modalLog.innerText = "Choose your ship";
     return;
   }
+
+  const gameOverDiv = document.createElement("div");
+  gameOverDiv.innerHTML = gameOver();
+  test1.appendChild(gameOverDiv);
+
+  const gameOverForm = document.querySelector("#gameOverForm");
+  function handleForm(event) {
+    event.preventDefault();
+  }
+  // vec definisano handleForm
+  gameOverForm.addEventListener("submit", handleForm);
+
+  const gameOverDialog = document.getElementById("gameOverDialog");
+  const confirmBtnGameOver = gameOverDialog.querySelector(
+    "#confirmBtnGameOver"
+  );
+  const closeBtnGameOver = gameOverDialog.querySelector("#closeBtnGameOver");
+
+  const gameOverContent = document.querySelector("#gameOverContent");
+
+  // Storage
+
+  // addNewNote.addEventListener("click", () => {
+  //   gameOverDialog.showModal();
+  // });
+
+  closeBtnGameOver.addEventListener("click", () => {
+    gameOverDialog.close();
+    // noteForm.reset();
+  });
+
+  confirmBtnGameOver.addEventListener("click", () => {
+    gameOverDialog.close();
+    text.remove();
+  });
 }
 
 // shipButton1.innerHTML = "Battleship";

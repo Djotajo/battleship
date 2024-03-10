@@ -158,10 +158,12 @@ export default class Gameboard {
 
         result.ship.isSunk();
         if (this.allShipsSunk()) {
+          const gameOverDialog = document.getElementById("gameOverDialog");
           if (this.name === "player2") {
-            console.log("You win!");
+            gameOverDialog.showModal();
+            // alert("You win!");
           } else {
-            console.log("You lose");
+            alert("You lose");
           }
         }
       } else {
