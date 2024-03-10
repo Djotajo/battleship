@@ -208,3 +208,23 @@ form {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
+#gameOverDialog {
+  position: absolute;
+  justify-content: center;
+  /* left: 10%; */
+  top: 25%;
+  /* transform: translate(-50%, -50%); */
+  width: 30%;
+  /* height: 50vh; */
+
+  background-image: url("../assets/defeat.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  aspect-ratio: 1/1;
+  border: none;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(1px);
+}

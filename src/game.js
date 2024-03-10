@@ -43,7 +43,8 @@ export default function game() {
   confirmBtn.disabled = true;
 
   addNewNote.addEventListener("click", () => {
-    addNote.showModal();
+    // addNote.showModal();
+    gameOverDialog.showModal();
   });
 
   closeBtn.addEventListener("click", () => {
@@ -70,7 +71,7 @@ export default function game() {
     );
     addNewNote.disabled = true;
     addNewNote.hidden = true;
-    test1.style.display = "none";
+    // test1.style.display = "none";
     noteForm.reset();
     const player1Name = document.getElementById("playerName");
     player1Name.innerText = `${player1.name}`;
@@ -366,8 +367,9 @@ export default function game() {
   }
 
   const gameOverDiv = document.createElement("div");
+  gameOverDiv.setAttribute("id", "gameOverDiv");
   gameOverDiv.innerHTML = gameOver();
-  test1.appendChild(gameOverDiv);
+  gameboardsDiv.insertAdjacentElement("afterend", gameOverDiv);
 
   const gameOverForm = document.querySelector("#gameOverForm");
   function handleForm(event) {

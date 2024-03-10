@@ -1,9 +1,10 @@
 export default function gameOver() {
   return `<dialog id="gameOverDialog">
+    <div>
         <form id="gameOverForm">
             <p>
                 <label for="gameOverContent"></label>
-                <div id="gameOverMessage">Choose your ship</div>
+                <div id="gameOverMessage">Game over dialog</div>
                 <div id="gameOverContent"></div>
             </p>
                 <div>
@@ -19,5 +20,6 @@ export default function gameOver() {
                   </button>
                 </div>
         </form>
+        </div>
     </dialog>`;
 }
