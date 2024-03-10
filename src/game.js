@@ -71,7 +71,7 @@ export default function game() {
     );
     addNewNote.disabled = true;
     addNewNote.hidden = true;
-    // test1.style.display = "none";
+    test1.style.display = "none";
     noteForm.reset();
     const player1Name = document.getElementById("playerName");
     player1Name.innerText = `${player1.name}`;
