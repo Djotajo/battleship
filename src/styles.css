@@ -212,19 +212,22 @@ form {
 #gameOverDialog {
   position: absolute;
   justify-content: center;
-  /* left: 10%; */
   top: 25%;
-  /* transform: translate(-50%, -50%); */
   width: 30%;
-  /* height: 50vh; */
-
   background-image: url("../assets/defeat.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   aspect-ratio: 1/1;
   border: none;
+  backdrop-filter: blur(1px);
 }
 
-dialog::backdrop {
+/* dialog::backdrop {
   backdrop-filter: blur(1px);
+} */
+
+#gameOverMessage {
+  text-align: center;
+  margin: 0;
+  /* color: #ff2400; */
 }

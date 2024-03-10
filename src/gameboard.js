@@ -2,6 +2,8 @@ import Square from "./square";
 // import Ship from "./ship";
 import ShipImg from "./shipWithImage";
 // import isGameOver from "./gameOver";
+import victory from "./victory";
+import defeat from "./defeat";
 
 export default class Gameboard {
   constructor(name) {
@@ -17,33 +19,6 @@ export default class Gameboard {
       }
     }
   }
-
-  // placeShip(name, length, field) {
-  //   let ship = new Ship(name, length);
-  //   let fieldsArray = [];
-  //   for (let a = 0; a < length; a++) {
-  //     let startPosition = this.board.filter(
-  //       (e) =>
-  //         e.coordinates.toString() ==
-  //         `${field[0].toString()},${(field[1] + a).toString()}`
-  //     )[0];
-  //     startPosition.ship = ship;
-  //   }
-  //   this.ships.push(ship);
-  // }
-
-  // placeShipPlayer(name, length, field) {
-  //   let ship = new Ship(name, length);
-  //   for (let a = 0; a < length; a++) {
-  //     let startPosition = this.board.filter(
-  //       (e) =>
-  //         e.coordinates.toString() ==
-  //         `${field[0].toString()},${(field[1] + a).toString()}`
-  //     )[0];
-  //     startPosition.ship = ship;
-  //   }
-  //   this.ships.push(ship);
-  // }
 
   // original
   placeImgShipPlayer(name, length, img, field, shipDirection) {
@@ -160,10 +135,13 @@ export default class Gameboard {
         if (this.allShipsSunk()) {
           const gameOverDialog = document.getElementById("gameOverDialog");
           if (this.name === "player2") {
+            victory();
             gameOverDialog.show();
             // alert("You win!");
           } else {
-            alert("You lose");
+            defeat();
+            gameOverDialog.show();
+            // alert("You lose");
           }
         }
       } else {

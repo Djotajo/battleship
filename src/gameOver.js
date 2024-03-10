@@ -4,19 +4,12 @@ export default function gameOver() {
         <form id="gameOverForm">
             <p>
                 <label for="gameOverContent"></label>
-                <div id="gameOverMessage">Game over dialog</div>
+                <h1 id="gameOverMessage">Defeat!</h1>
                 <div id="gameOverContent"></div>
             </p>
                 <div>
-                  <button
-                    id="closeBtnGameOver"
-                    value="cancel"
-                    formmethod="dialog"
-                    type="button">
-                    Cancel
-                  </button>
                   <button id="confirmBtnGameOver" value="default" formmethod="dialog">
-                    Confirm
+                    Play again
                   </button>
                 </div>
         </form>

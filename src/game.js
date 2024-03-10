@@ -43,8 +43,8 @@ export default function game() {
   confirmBtn.disabled = true;
 
   addNewNote.addEventListener("click", () => {
-    // addNote.showModal();
-    gameOverDialog.showModal();
+    addNote.showModal();
+    // gameOverDialog.showModal();
   });
 
   closeBtn.addEventListener("click", () => {
@@ -382,24 +382,13 @@ export default function game() {
   const confirmBtnGameOver = gameOverDialog.querySelector(
     "#confirmBtnGameOver"
   );
-  const closeBtnGameOver = gameOverDialog.querySelector("#closeBtnGameOver");
 
   const gameOverContent = document.querySelector("#gameOverContent");
 
-  // Storage
-
-  // addNewNote.addEventListener("click", () => {
-  //   gameOverDialog.showModal();
-  // });
-
-  closeBtnGameOver.addEventListener("click", () => {
-    gameOverDialog.close();
-    // noteForm.reset();
-  });
-
   confirmBtnGameOver.addEventListener("click", () => {
-    gameOverDialog.close();
-    text.remove();
+    window.location.reload();
+    // gameOverDialog.close();
+    // game();
   });
 }
 
