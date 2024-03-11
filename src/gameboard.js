@@ -116,6 +116,7 @@ export default class Gameboard {
   }
 
   receiveAttack(field) {
+    const gameboardsDiv = document.getElementById("gameboard");
     const result = this.board.filter(
       (e) => e.coordinates.toString() == field.toString()
     )[0];
@@ -137,10 +138,12 @@ export default class Gameboard {
           if (this.name === "player2") {
             victory();
             gameOverDialog.show();
+            gameboardsDiv.style.display = "none";
             // alert("You win!");
           } else {
             defeat();
             gameOverDialog.show();
+            gameboardsDiv.style.display = "none";
             // alert("You lose");
           }
         }
