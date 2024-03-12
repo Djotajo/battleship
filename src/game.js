@@ -195,11 +195,11 @@ export default function game() {
   });
   modalShipButtons.appendChild(shipButton5);
 
-  shipButton1.style.backgroundImage = `url("../assets/Full ships/05 - Battleship.png")`;
-  shipButton2.style.backgroundImage = `url("../assets/Full ships/04 - Destroyer.png")`;
-  shipButton3.style.backgroundImage = `url("../assets/Full ships/03 - Submarine.png")`;
-  shipButton4.style.backgroundImage = `url("../assets/Full ships/03 - Cruiser.png")`;
-  shipButton5.style.backgroundImage = `url("../assets/Full ships/02 - Gunboat.png")`;
+  shipButton1.style.backgroundImage = `url("05-Battleship.png")`;
+  shipButton2.style.backgroundImage = `url("04-Destroyer.png")`;
+  shipButton3.style.backgroundImage = `url("03-Submarine.png")`;
+  shipButton4.style.backgroundImage = `url("03-Cruiser.png")`;
+  shipButton5.style.backgroundImage = `url("02-Gunboat.png")`;
 
   let testButtons = document.querySelectorAll("#player1 > button");
 
@@ -340,6 +340,9 @@ export default function game() {
           (element) => element.name === `${Number(butId[8]) + n}${butId[10]}`
         );
         shipField.classList.add("shipped");
+        console.log(
+          `url(${found.img.slice(0, 10)}rotated${found.img.slice(10)})`
+        );
         shipField.style.backgroundImage = `url(${found.img.slice(
           0,
           10
