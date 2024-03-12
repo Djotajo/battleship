@@ -3,5 +3,5 @@ export default function victory() {
   gameOverDialog.style.backgroundImage = `url(../assets/victory.jpg)`;
   const gameOverMessage = document.getElementById("gameOverMessage");
   gameOverMessage.innerHTML = "Victory!";
-  gameOverMessage.style.color = `green`;
+  gameOverMessage.classList.add("win");
 }

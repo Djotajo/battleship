@@ -43,8 +43,8 @@ export default function game() {
   confirmBtn.disabled = true;
 
   addNewNote.addEventListener("click", () => {
-    addNote.showModal();
-    // gameOverDialog.showModal();
+    // addNote.showModal();
+    gameOverDialog.showModal();
   });
 
   closeBtn.addEventListener("click", () => {
@@ -124,6 +124,7 @@ export default function game() {
       shipDirection = shipDirectionButton.innerText;
     } else {
       shipDirectionButton.innerText = "Horizontal";
+      shipDirection = shipDirectionButton.innerText;
     }
   }
 
@@ -363,6 +364,9 @@ export default function game() {
     currentButton.disabled = true;
     drawShips(field, currentShip.length, shipDirection);
     modalLog.innerText = "Choose your ship";
+    if (player1.board.ships.length >= 5) {
+      modalLog.innerText = "Give 'em hell captain";
+    }
     return;
   }
 

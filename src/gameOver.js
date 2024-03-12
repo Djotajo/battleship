@@ -8,7 +8,7 @@ export default function gameOver() {
                 <div id="gameOverContent"></div>
             </p>
                 <div>
-                  <button id="confirmBtnGameOver" value="default" formmethod="dialog">
+                  <button id="confirmBtnGameOver" class="play-again" value="default" formmethod="dialog">
                     Play again
                   </button>
                 </div>

@@ -6,18 +6,19 @@ export default function newNoteForm() {
             <p>
                 <label for="text"></label>
                 <div id="caption">Choose your ship</div>
-                <button id="shipDirectionButton">Horizontal</button>
+                <button id="shipDirectionButton" class="form-btn">Horizontal</button>
                 <div id="text"></div>
             </p>
                 <div>
                   <button
                     id="closeBtn"
+                    class="form-btn"
                     value="cancel"
                     formmethod="dialog"
                     type="button">
                     Cancel
                   </button>
-                  <button id="confirmBtn" value="default" formmethod="dialog">
+                  <button id="confirmBtn" class="form-btn" value="default" formmethod="dialog">
                     Confirm
                   </button>
                 </div>
