@@ -128,7 +128,7 @@ export default class Gameboard {
       if (result.ship) {
         console.log("Hit!");
         resultField.innerHTML =
-          '<img src="../assets/flame.png" class="flameImage">';
+          '<img src="/assets/flame.png" class="flameImage">';
         const flameImage = resultField.querySelector(".flameImage");
         result.ship.hits++;
 
