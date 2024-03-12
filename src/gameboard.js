@@ -127,7 +127,8 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
-        resultField.innerHTML = '<img src="flame.png" class="flameImage">';
+        resultField.innerHTML =
+          '<img src="/assets/flame.png" class="flameImage">';
         const flameImage = resultField.querySelector(".flameImage");
         result.ship.hits++;
 
@@ -170,10 +171,7 @@ export default class Gameboard {
     for (let n = 0; n < this.board.length; n++) {
       let visualField = document.createElement("button");
       if (this.board[n].orientation === "vertical") {
-        visualField.style.backgroundImage = `url(${this.board[n].img.slice(
-          0,
-          10
-        )}rotated${this.board[n].img.slice(10)})`;
+        visualField.style.backgroundImage = `url(rotated${this.board[n].img})`;
       } else if (this.board[n].img != null) {
         visualField.style.backgroundImage = `url(${this.board[n].img})`;
       }
@@ -218,11 +216,9 @@ export default class Gameboard {
             let shipDown = document.getElementById(`player2_${element}`);
             let numbers = `${element[0]}${element[1]}`;
             if (this.board[n].orientation === "vertical") {
-              shipDown.style.backgroundImage = `url(${this.board[
-                Number(numbers)
-              ].img.slice(0, 10)}rotated${this.board[Number(numbers)].img.slice(
-                10
-              )})`;
+              shipDown.style.backgroundImage = `url(rotated${
+                this.board[Number(numbers)].img
+              })`;
             } else {
               shipDown.style.backgroundImage = `url(${
                 this.board[Number(numbers)].img

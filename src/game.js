@@ -91,11 +91,11 @@ export default function game() {
 
   player1.board.allShipsSunk();
 
-  player2.board.placeImgShipAI("battleship", 5, "../assets/battleship00");
-  player2.board.placeImgShipAI("destroyer", 4, "../assets/destroyer00");
-  player2.board.placeImgShipAI("submarine", 3, "../assets/submarine00");
-  player2.board.placeImgShipAI("cruiser", 3, "../assets/cruiser00");
-  player2.board.placeImgShipAI("gunboat", 2, "../assets/gunboat00");
+  player2.board.placeImgShipAI("battleship", 5, "battleship00");
+  player2.board.placeImgShipAI("destroyer", 4, "destroyer00");
+  player2.board.placeImgShipAI("submarine", 3, "submarine00");
+  player2.board.placeImgShipAI("cruiser", 3, "cruiser00");
+  player2.board.placeImgShipAI("gunboat", 2, "gunboat00");
 
   // player2.board.paintAI();
   player2.board.allShipsSunk();
@@ -152,7 +152,7 @@ export default function game() {
     currentShip = {
       name: "Battleship",
       length: 5,
-      img: "../assets/battleship00",
+      img: "battleship00",
     };
     currentButton = shipButton1;
     changeCaption(currentShip.name);
@@ -163,7 +163,7 @@ export default function game() {
     currentShip = {
       name: "Destroyer",
       length: 4,
-      img: "../assets/destroyer00",
+      img: "destroyer00",
     };
     currentButton = shipButton2;
     changeCaption(currentShip.name);
@@ -174,7 +174,7 @@ export default function game() {
     currentShip = {
       name: "Submarine",
       length: 3,
-      img: "../assets/submarine00",
+      img: "submarine00",
     };
     currentButton = shipButton3;
     changeCaption(currentShip.name);
@@ -182,14 +182,14 @@ export default function game() {
   modalShipButtons.appendChild(shipButton3);
 
   shipButton4.addEventListener("click", function () {
-    currentShip = { name: "Cruiser", length: 3, img: "../assets/cruiser00" };
+    currentShip = { name: "Cruiser", length: 3, img: "cruiser00" };
     currentButton = shipButton4;
     changeCaption(currentShip.name);
   });
   modalShipButtons.appendChild(shipButton4);
 
   shipButton5.addEventListener("click", function () {
-    currentShip = { name: "Gunboat", length: 2, img: "../assets/gunboat00" };
+    currentShip = { name: "Gunboat", length: 2, img: "gunboat00" };
     currentButton = shipButton5;
     changeCaption(currentShip.name);
   });
@@ -340,13 +340,8 @@ export default function game() {
           (element) => element.name === `${Number(butId[8]) + n}${butId[10]}`
         );
         shipField.classList.add("shipped");
-        console.log(
-          `url(${found.img.slice(0, 10)}rotated${found.img.slice(10)})`
-        );
-        shipField.style.backgroundImage = `url(${found.img.slice(
-          0,
-          10
-        )}rotated${found.img.slice(10)})`;
+        console.log(`url(rotated${found.img})`);
+        shipField.style.backgroundImage = `url(rotated${found.img})`;
       }
     }
   }
