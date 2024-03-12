@@ -7,9 +7,8 @@ import currentTurn from "./currentTurn";
 import newNoteForm from "./newNoteForm";
 
 export default function game() {
-  //   let player1 = new Player(prompt("Enter your name"));
-  let player1 = new Player("Djordje");
-  let player2 = new Player("AI");
+  let player1 = new Player("Player");
+  let player2 = new Player("Computer");
   // firstMove(player1, player2);
 
   const gameboardsDiv = document.getElementById("gameboard");
@@ -43,8 +42,8 @@ export default function game() {
   confirmBtn.disabled = true;
 
   addNewNote.addEventListener("click", () => {
-    // addNote.showModal();
-    gameOverDialog.showModal();
+    addNote.showModal();
+    // gameOverDialog.showModal();
   });
 
   closeBtn.addEventListener("click", () => {
@@ -145,8 +144,8 @@ export default function game() {
   let currentShip;
   let currentButton;
 
-  function changeCaption(ship, length) {
-    modalLog.innerText = `Place your ${ship}! It has a size of ${length}`;
+  function changeCaption(ship) {
+    modalLog.innerText = `Place your ${ship}!`;
   }
 
   shipButton1.addEventListener("click", function () {
@@ -156,7 +155,7 @@ export default function game() {
       img: "../assets/battleship00",
     };
     currentButton = shipButton1;
-    changeCaption(currentShip.name, currentShip.length);
+    changeCaption(currentShip.name);
   });
   modalShipButtons.appendChild(shipButton1);
 
@@ -167,7 +166,7 @@ export default function game() {
       img: "../assets/destroyer00",
     };
     currentButton = shipButton2;
-    changeCaption(currentShip.name, currentShip.length);
+    changeCaption(currentShip.name);
   });
   modalShipButtons.appendChild(shipButton2);
 
@@ -178,21 +177,21 @@ export default function game() {
       img: "../assets/submarine00",
     };
     currentButton = shipButton3;
-    changeCaption(currentShip.name, currentShip.length);
+    changeCaption(currentShip.name);
   });
   modalShipButtons.appendChild(shipButton3);
 
   shipButton4.addEventListener("click", function () {
     currentShip = { name: "Cruiser", length: 3, img: "../assets/cruiser00" };
     currentButton = shipButton4;
-    changeCaption(currentShip.name, currentShip.length);
+    changeCaption(currentShip.name);
   });
   modalShipButtons.appendChild(shipButton4);
 
   shipButton5.addEventListener("click", function () {
     currentShip = { name: "Gunboat", length: 2, img: "../assets/gunboat00" };
     currentButton = shipButton5;
-    changeCaption(currentShip.name, currentShip.length);
+    changeCaption(currentShip.name);
   });
   modalShipButtons.appendChild(shipButton5);
 

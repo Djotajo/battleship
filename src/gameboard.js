@@ -164,7 +164,7 @@ export default class Gameboard {
   paint() {
     const gameboardsDiv = document.getElementById("gameboard");
     const playerPanel = document.createElement("div");
-    const playerName = document.createElement("h3");
+    const playerName = document.createElement("h2");
     playerName.setAttribute("id", "playerName");
     const visualBoard = document.createElement("div");
     visualBoard.id = this.name;
@@ -203,7 +203,7 @@ export default class Gameboard {
   paintAI() {
     const gameboardsDiv = document.getElementById("gameboard");
     const aiPanel = document.createElement("div");
-    const aiName = document.createElement("h3");
+    const aiName = document.createElement("h2");
     aiName.setAttribute("id", "aiName");
     const visualBoard = document.createElement("div");
     visualBoard.id = this.name;

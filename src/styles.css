@@ -1,3 +1,14 @@
+body {
+  font-family: "IM Fell English", Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 4em;
+  margin-bottom: 5%;
+  font-family: "IM Fell English", Verdana, Geneva, Tahoma, sans-serif;
+}
+
 #gameboard {
   display: flex;
   justify-content: center;
@@ -42,6 +53,10 @@
   pointer-events: none;
 }
 
+h2 {
+  color: wheat;
+}
+
 #gameboard > div > div button:disabled {
   border: none;
   outline-color: black;
@@ -84,12 +99,6 @@
   outline-width: 1px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 4em;
-  margin-bottom: 5%;
-}
-
 .test1 {
   display: flex;
   justify-content: center;
@@ -125,16 +134,21 @@ dialog {
 
 .play-again {
   display: inline-block;
+  width: 30%;
   padding: 10px 20px;
   font-size: 16px;
   text-align: center;
-  text-decoration: none;
+  font-weight: 600;
   border-radius: 5px;
   cursor: pointer;
-  border: none;
+  border: 1px solid white;
   transition: background-color 0.3s ease;
   background-color: red;
   color: #fff;
+}
+
+.play-again:hover {
+  background: linear-gradient(to right, #ff6666, #ff9999);
 }
 
 .form-btn {
@@ -152,6 +166,7 @@ dialog {
 
 .form-btn:disabled {
   background-color: grey;
+  pointer-events: none;
 }
 
 #text > #player1 {
@@ -200,7 +215,6 @@ form {
   margin-left: auto;
   margin-right: auto;
   border: none;
-  /* padding: 1vh; */
 }
 
 #player1 button {
@@ -273,24 +287,18 @@ form {
   background-size: 100% 100%;
   aspect-ratio: 1/1;
   border: none;
-  /* backdrop-filter: blur(1px); */
+  align-items: center;
 }
-
-/* dialog::backdrop {
-  backdrop-filter: blur(1px);
-} */
 
 #gameOverMessage {
   text-align: center;
   margin: 0;
-  /* color: #ff2400; */
 }
 
 body {
   background-image: url("../assets/background01.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-size: 100% 100%; */
 }
 
 /* Button author - Cole McCombs https://codepen.io/mccombsc */
@@ -298,7 +306,7 @@ body {
   margin-top: 5%;
   min-width: 300px;
   min-height: 60px;
-  font-family: "Nunito", sans-serif;
+  font-family: "IM Fell English", Verdana, Geneva, Tahoma, sans-serif;
   font-size: 22px;
   text-transform: uppercase;
   letter-spacing: 1.3px;
@@ -357,7 +365,7 @@ button:focus::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* animation: ring 1.5s infinite; */
+  animation: ring 1.5s infinite;
 }
 
 .test1 > button:hover::after,
@@ -366,7 +374,7 @@ button:focus::after {
   display: none;
 }
 
-/* @keyframes ring {
+@keyframes ring {
   0% {
     width: 30px;
     height: 30px;
@@ -377,21 +385,40 @@ button:focus::after {
     height: 300px;
     opacity: 0;
   }
-} */
+}
 
 .win {
   color: green;
-  font-weight: bold; /* Make the font bold */
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1); /* Add a shadow effect */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
 }
 
 .defeat {
   color: #ff2400;
-  font-weight: bold; /* Make the font bold */
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1); /* Add a shadow effect */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
 }
 
 #caption {
   font-size: 2vh;
   font-weight: 600;
+}
+
+#gameOverDialog {
+  position: relative;
+  text-align: center;
+}
+
+#gameOverMessage {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+}
+
+#confirmBtnGameOver {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
