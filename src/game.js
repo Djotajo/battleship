@@ -5,6 +5,8 @@ import gameOver from "./gameOver";
 import randomAIAttack from "./randomAIAttack";
 import currentTurn from "./currentTurn";
 import newNoteForm from "./newNoteForm";
+import footer from "./footer";
+import gitLogo from "../assets/github-mark-white.png";
 
 export default function game() {
   let player1 = new Player("Player");
@@ -391,6 +393,11 @@ export default function game() {
     // gameOverDialog.close();
     // game();
   });
+
+  const body = document.querySelector("body");
+  body.appendChild(footer());
+
+  document.getElementById("githubLogo").src = gitLogo;
 }
 
 // shipButton1.innerHTML = "Battleship";

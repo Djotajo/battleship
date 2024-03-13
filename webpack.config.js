@@ -14,7 +14,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(jpg|png|gif|svg)$/i,
+        test: /\.(jpg|jpe?g|png|gif|svg)$/i,
         type: "asset/resource",
       },
       {
@@ -26,19 +26,6 @@ module.exports = {
             presets: [["@babel/preset-env", { targets: "defaults" }]],
           },
         },
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 8192, // In bytes
-              name: "[name].[hash:8].[ext]",
-              outputPath: "images", // Output directory
-            },
-          },
-        ],
       },
     ],
   },
