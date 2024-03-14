@@ -1,6 +1,4 @@
 export default function newNoteForm() {
-  // let original = document.querySelector("#player1");
-  // let copy = original.cloneNode(true);
   return `<dialog id="addNote">
         <form id="noteForm">
             <p>
@@ -30,26 +28,3 @@ export default function newNoteForm() {
             </label>
           </p>`;
 }
-
-// // Form and dialog
-
-// closeBtn.addEventListener("click", () => {
-//   addNote.close();
-//   noteForm.reset();
-// });
-
-// confirmBtn.addEventListener("click", (event) => {
-//   const formCheck = document.getElementById("noteForm").checkValidity();
-//   if (!formCheck) {
-//     document.getElementById("noteForm").reportValidity();
-//   } else {
-//     event.preventDefault();
-//     // const note = new newNote(title.value, text.value);
-//     const note = new newNote(text.value);
-//     newNoteToStorage(note);
-//     // refresh();
-//     addNote.close();
-//   }
-//   noteForm.reset();
-//   render(notesDisplay());
-// });

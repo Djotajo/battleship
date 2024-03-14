@@ -127,8 +127,7 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
-        resultField.innerHTML = '<img src="flame.png" class="flameImage">';
-        const flameImage = resultField.querySelector(".flameImage");
+        resultField.innerHTML = '<img src="flame.png"';
         result.ship.hits++;
 
         result.ship.isSunk();
@@ -138,12 +137,10 @@ export default class Gameboard {
             victory();
             gameOverDialog.show();
             gameboardsDiv.style.display = "none";
-            // alert("You win!");
           } else {
             defeat();
             gameOverDialog.show();
             gameboardsDiv.style.display = "none";
-            // alert("You lose");
           }
         }
       } else {
@@ -159,7 +156,6 @@ export default class Gameboard {
     }
   }
 
-  // original
   paint() {
     const gameboardsDiv = document.getElementById("gameboard");
     const playerPanel = document.createElement("div");

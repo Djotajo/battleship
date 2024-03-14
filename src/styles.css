@@ -30,26 +30,14 @@ h1 {
   aspect-ratio: 1/1;
   height: auto;
   padding: 0;
-  /* border: 2px solid black; */
   box-shadow: 13px 21px 37px -1px rgba(0, 42, 250, 0.49);
   outline-style: solid;
   outline-offset: -1px;
   opacity: 0.9;
 }
 
-/* #gameboard > div > div .dot {
-  background-image: radial-gradient(#e53935 30%, white 30%);
-  opacity: 0.5;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-} */
-
 #gameboard > div > div .miss {
   background-image: radial-gradient(#e53935 30%, rgb(239, 239, 239) 30%);
-  /* opacity: 0.5; */
-  /* width: 100%;
-  height: 100%; */
   pointer-events: none;
 }
 
@@ -76,9 +64,6 @@ h2 {
 
 #gameboard > div > div .hit {
   background-image: radial-gradient(#be0606 30%, white 30%);
-  /* opacity: 0.5; */
-  /* width: 100%;
-  height: 100%; */
   pointer-events: none;
   z-index: 2;
 }
@@ -193,7 +178,6 @@ dialog {
   outline-width: 1px;
 }
 
-/* FORM CSS */
 form > p {
   margin: 0;
   padding: 0;

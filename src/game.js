@@ -2,7 +2,6 @@ import Player from "./player";
 import firstMove from "./firstMove";
 import Gameboard from "./gameboard";
 import gameOver from "./gameOver";
-import randomAIAttack from "./randomAIAttack";
 import currentTurn from "./currentTurn";
 import newNoteForm from "./newNoteForm";
 import footer from "./footer";
@@ -45,7 +44,6 @@ export default function game() {
 
   addNewNote.addEventListener("click", () => {
     addNote.showModal();
-    // gameOverDialog.showModal();
   });
 
   closeBtn.addEventListener("click", () => {
@@ -99,16 +97,7 @@ export default function game() {
   player2.board.placeImgShipAI("cruiser", 3, "cruiser00");
   player2.board.placeImgShipAI("gunboat", 2, "gunboat00");
 
-  // player2.board.paintAI();
   player2.board.allShipsSunk();
-
-  // if (player2.turn === true) {
-  //   player1.board.receiveAttack(randomAIAttack());
-  //   if (player1.board.allShipsSunk()) {
-  //     console.log("You lose");
-  //   }
-  //   player2.turn = false;
-  // }
 
   const modalLog = document.getElementById("caption");
   const shipDirectionButton = document.getElementById("shipDirectionButton");
@@ -204,8 +193,6 @@ export default function game() {
   shipButton5.style.backgroundImage = `url("02-Gunboat.png")`;
 
   let testButtons = document.querySelectorAll("#player1 > button");
-
-  // text.appendChild(modalShipButtons);
 
   function checkFree(button, length) {
     let butId = button.id;
@@ -347,7 +334,7 @@ export default function game() {
       }
     }
   }
-  // test kopija
+
   function addShipToField(field) {
     let testCoordinates = field.id
       .slice(8)
@@ -375,10 +362,7 @@ export default function game() {
   gameboardsDiv.insertAdjacentElement("afterend", gameOverDiv);
 
   const gameOverForm = document.querySelector("#gameOverForm");
-  function handleForm(event) {
-    event.preventDefault();
-  }
-  // vec definisano handleForm
+
   gameOverForm.addEventListener("submit", handleForm);
 
   const gameOverDialog = document.getElementById("gameOverDialog");
@@ -399,9 +383,3 @@ export default function game() {
 
   document.getElementById("githubLogo").src = gitLogo;
 }
-
-// shipButton1.innerHTML = "Battleship";
-// shipButton2.innerHTML = "Destroyer";
-// shipButton3.innerHTML = "Submarine";
-// shipButton4.innerHTML = "Cruiser";
-// shipButton5.innerHTML = "Gunboat";
