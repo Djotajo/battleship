@@ -97,7 +97,7 @@ h2 {
 dialog {
   width: 40%;
   border: none;
-  animation: change-opacity 2s;
+  animation: introduce-modal ease-out 2s;
 }
 
 .flameImage {
@@ -110,6 +110,15 @@ dialog {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes introduce-modal {
+  0% {
+    transform: translateY(-2000px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
