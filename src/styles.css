@@ -97,6 +97,20 @@ h2 {
 dialog {
   width: 40%;
   border: none;
+  animation: change-opacity 2s;
+}
+
+.flameImage {
+  animation: change-opacity 1s;
+}
+
+@keyframes change-opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #shipDirectionButton {

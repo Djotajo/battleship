@@ -127,7 +127,8 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
-        resultField.innerHTML = '<img src="flame.png"';
+        console.log(`${this.name}_${field}`);
+        resultField.innerHTML = '<img src="flame.png" class="flameImage">';
         result.ship.hits++;
 
         result.ship.isSunk();
