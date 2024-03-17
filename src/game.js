@@ -3,7 +3,7 @@ import firstMove from "./firstMove";
 import Gameboard from "./gameboard";
 import gameOver from "./gameOver";
 import currentTurn from "./currentTurn";
-import newNoteForm from "./newNoteForm";
+import placeShipsModal from "./placeShipsModal";
 import footer from "./footer";
 import gitLogo from "../assets/github-mark-white.png";
 
@@ -13,26 +13,26 @@ export default function game() {
   // firstMove(player1, player2);
 
   const gameboardsDiv = document.getElementById("gameboard");
+  const inputSection = document.querySelector(".input-section");
 
-  let inputSection = document.querySelector(".input-section");
-  // dialog pocetak
-  const addNewNote = document.createElement("button");
-  addNewNote.innerHTML = "Place your ships";
-  inputSection.appendChild(addNewNote);
+  // Dialog start
+  const placeShipsButton = document.createElement("button");
+  placeShipsButton.innerHTML = "Place your ships";
+  inputSection.appendChild(placeShipsButton);
 
-  const newNoteFormDiv = document.createElement("div");
-  newNoteFormDiv.innerHTML = newNoteForm();
-  inputSection.appendChild(newNoteFormDiv);
+  const placeShipsDiv = document.createElement("div");
+  placeShipsDiv.innerHTML = placeShipsModal();
+  inputSection.appendChild(placeShipsDiv);
 
-  const forma = document.querySelector("#noteForm");
+  const placeShipsForm = document.querySelector("#noteForm");
   function handleForm(event) {
     event.preventDefault();
   }
-  forma.addEventListener("submit", handleForm);
+  placeShipsForm.addEventListener("submit", handleForm);
 
   const addNote = document.getElementById("addNote");
   const confirmBtn = addNote.querySelector("#confirmBtn");
-  const closeBtn = document.querySelector("#closeBtn");
+  const closeBtn = addNote.querySelector("#closeBtn");
 
   const text = document.querySelector("#text");
   const modalShipButtons = document.createElement("div");
@@ -42,7 +42,7 @@ export default function game() {
   // Storage
   confirmBtn.disabled = true;
 
-  addNewNote.addEventListener("click", () => {
+  placeShipsButton.addEventListener("click", () => {
     addNote.showModal();
   });
 
@@ -68,8 +68,8 @@ export default function game() {
         currentTurn(player1, player2);
       })
     );
-    addNewNote.disabled = true;
-    addNewNote.hidden = true;
+    placeShipsButton.disabled = true;
+    placeShipsButton.hidden = true;
     inputSection.style.display = "none";
     noteForm.reset();
     const player1Name = document.getElementById("playerName");
@@ -84,8 +84,7 @@ export default function game() {
   player2.board.boardFill();
   let newOriginal = player1.board.paintModal();
 
-  let copyLocation = document.querySelector("#text");
-  copyLocation.append(newOriginal);
+  text.append(newOriginal);
 
   // dialog kraj
 

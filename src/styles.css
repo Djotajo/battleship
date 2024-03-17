@@ -1,5 +1,8 @@
 body {
   font-family: "IM Fell English", Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url("background01.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {
@@ -84,24 +87,24 @@ h2 {
   outline-width: 1px;
 }
 
-.inputSection {
+.input-section {
   display: flex;
   justify-content: center;
   height: 5em;
 }
 
-.inputSection > div {
+.input-section > div {
   border: none;
 }
 
 dialog {
   width: 40%;
   border: none;
-  animation: introduce-modal ease-out 2s;
+  animation: introduce-modal ease-out 500ms;
 }
 
 .flameImage {
-  animation: change-opacity 1s;
+  animation: change-opacity 500ms;
 }
 
 @keyframes change-opacity {
@@ -115,10 +118,12 @@ dialog {
 
 @keyframes introduce-modal {
   0% {
-    transform: translateY(-2000px);
+    transform: translateY(-500px);
+    opacity: 0;
   }
   100% {
     transform: translateY(0px);
+    opacity: 1;
   }
 }
 
@@ -138,6 +143,8 @@ dialog {
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease;
+  background-color: #1e6180;
+  color: #fff;
 }
 
 .play-again {
@@ -157,11 +164,6 @@ dialog {
 
 .play-again:hover {
   background: linear-gradient(to right, #ff6666, #ff9999);
-}
-
-.form-btn {
-  background-color: #1e6180;
-  color: #fff;
 }
 
 .form-btn:hover {
@@ -302,14 +304,8 @@ form {
   margin: 0;
 }
 
-body {
-  background-image: url("background01.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 /* Button author - Cole McCombs https://codepen.io/mccombsc */
-.inputSection > button {
+.input-section > button {
   margin-top: 10%;
   min-width: 300px;
   min-height: 60px;
@@ -336,7 +332,7 @@ body {
   z-index: 2;
 }
 
-.inputSection > button::before {
+.input-section > button::before {
   content: "";
   border-radius: 1000px;
   min-width: calc(300px + 12px);
@@ -351,18 +347,18 @@ body {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.inputSection > button:hover,
+.input-section > button:hover,
 .button:focus {
   color: #313133;
   transform: translateY(-6px);
 }
 
-.inputSection > button:hover::before,
+.input-section > button:hover::before,
 button:focus::before {
   opacity: 1;
 }
 
-.inputSection > button::after {
+.input-section > button::after {
   content: "";
   width: 30px;
   height: 30px;
@@ -376,7 +372,7 @@ button:focus::before {
   animation: ring 1.5s infinite;
 }
 
-.inputSection > button:hover::after,
+.input-section > button:hover::after,
 button:focus::after {
   animation: none;
   display: none;

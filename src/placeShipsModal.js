@@ -1,4 +1,4 @@
-export default function newNoteForm() {
+export default function placeShipsModal() {
   return `<dialog id="addNote">
         <form id="noteForm">
             <p>
