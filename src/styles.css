@@ -84,13 +84,13 @@ h2 {
   outline-width: 1px;
 }
 
-.test1 {
+.inputSection {
   display: flex;
   justify-content: center;
   height: 5em;
 }
 
-.test1 > div {
+.inputSection > div {
   border: none;
 }
 
@@ -309,7 +309,7 @@ body {
 }
 
 /* Button author - Cole McCombs https://codepen.io/mccombsc */
-.test1 > button {
+.inputSection > button {
   margin-top: 10%;
   min-width: 300px;
   min-height: 60px;
@@ -333,9 +333,10 @@ body {
   outline: none;
   position: relative;
   padding: 10px;
+  z-index: 2;
 }
 
-.test1 > button::before {
+.inputSection > button::before {
   content: "";
   border-radius: 1000px;
   min-width: calc(300px + 12px);
@@ -350,18 +351,18 @@ body {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.test1 > button:hover,
+.inputSection > button:hover,
 .button:focus {
   color: #313133;
   transform: translateY(-6px);
 }
 
-.test1 > button:hover::before,
+.inputSection > button:hover::before,
 button:focus::before {
   opacity: 1;
 }
 
-.test1 > button::after {
+.inputSection > button::after {
   content: "";
   width: 30px;
   height: 30px;
@@ -375,7 +376,7 @@ button:focus::before {
   animation: ring 1.5s infinite;
 }
 
-.test1 > button:hover::after,
+.inputSection > button:hover::after,
 button:focus::after {
   animation: none;
   display: none;

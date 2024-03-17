@@ -14,15 +14,15 @@ export default function game() {
 
   const gameboardsDiv = document.getElementById("gameboard");
 
-  let test1 = document.querySelector(".test1");
+  let inputSection = document.querySelector(".input-section");
   // dialog pocetak
   const addNewNote = document.createElement("button");
   addNewNote.innerHTML = "Place your ships";
-  test1.appendChild(addNewNote);
+  inputSection.appendChild(addNewNote);
 
   const newNoteFormDiv = document.createElement("div");
   newNoteFormDiv.innerHTML = newNoteForm();
-  test1.appendChild(newNoteFormDiv);
+  inputSection.appendChild(newNoteFormDiv);
 
   const forma = document.querySelector("#noteForm");
   function handleForm(event) {
@@ -70,7 +70,7 @@ export default function game() {
     );
     addNewNote.disabled = true;
     addNewNote.hidden = true;
-    test1.style.display = "none";
+    inputSection.style.display = "none";
     noteForm.reset();
     const player1Name = document.getElementById("playerName");
     player1Name.innerText = `${player1.name}`;
