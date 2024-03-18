@@ -7,4 +7,4 @@ export default function randomAIAttack() {
   return attack;
 }
 
-const attacks = [];
+export const attacks = [];
