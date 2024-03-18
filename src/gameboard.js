@@ -144,6 +144,7 @@ export default class Gameboard {
             gameboardsDiv.style.display = "none";
           }
         }
+        return true;
       } else {
         console.log("Miss!");
         resultField.classList.add("miss");
