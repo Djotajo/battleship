@@ -11,28 +11,26 @@ export default function currentTurn(player1, player2) {
     } else {
       attackData = fieldsArray.shift();
       attack = attackData.slice(0, 2);
-      console.log(attackData);
-      console.log(attack);
     }
     attacks.push(JSON.stringify(attack));
     setTimeout(() => {
-      console.log(attack);
       if (player1.board.receiveAttack(attack) === true) {
-        if (fieldsArray.length === 0) {
+        // console.log(attackData);
+        if (attackData) {
+          if (attackData[2] === "horizontal") {
+            fieldsArray = fieldsArray.filter((e) => e[2] === "horizontal");
+            surroundingFieldLeft(attack);
+            surroundingFieldRight(attack);
+          } else if (attackData[2] === "vertical") {
+            fieldsArray = fieldsArray.filter((e) => e[2] === "vertical");
+            surroundingFieldBottom(attack);
+            surroundingFieldTop(attack);
+          }
+        } else if (fieldsArray.length === 0) {
           surroundingFieldLeft(attack);
+          surroundingFieldTop(attack);
           surroundingFieldRight(attack);
           surroundingFieldBottom(attack);
-          surroundingFieldTop(attack);
-        } else if (attackData[2] === "horizontal") {
-          fieldsArray = fieldsArray.filter((e) => e[2] === "horizontal");
-          console.log("horizontal hit");
-          console.log(fieldsArray);
-          surroundingFieldLeft(attack);
-          surroundingFieldRight(attack);
-        } else if (attackData[2] === "vertical") {
-          fieldsArray = fieldsArray.filter((e) => e[2] === "vertical");
-          surroundingFieldBottom(attack);
-          surroundingFieldTop(attack);
         }
       }
     }, 500);
