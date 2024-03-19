@@ -127,7 +127,6 @@ export default class Gameboard {
       let resultField = document.getElementById(`${this.name}_${field}`);
       if (result.ship) {
         console.log("Hit!");
-        console.log(`${this.name}_${field}`);
         resultField.innerHTML = '<img src="flame.png" class="flameImage">';
         result.ship.hits++;
 
@@ -143,6 +142,9 @@ export default class Gameboard {
             gameOverDialog.show();
             gameboardsDiv.style.display = "none";
           }
+        }
+        if (result.ship.isSunk() === undefined) {
+          return "sunk";
         }
         return true;
       } else {

@@ -14,7 +14,7 @@ export default class ShipImg {
 
   isSunk() {
     return this.hits === this.length
-      ? (this.sunk = true) && console.log("Sunk")
+      ? (this.sunk = true) && console.log("Sunk") && true
       : (this.sunk = false);
   }
 }

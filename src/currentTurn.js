@@ -5,7 +5,7 @@ export default function currentTurn(player1, player2) {
   if (!player1.board.allShipsSunk() && !player2.board.allShipsSunk()) {
     let attack;
     let attackData;
-    console.log(`These are attacks ${attacks}`);
+    // console.log(`These are attacks ${attacks}`);
     if (fieldsArray.length === 0) {
       attack = randomAIAttack();
     } else {
@@ -14,7 +14,10 @@ export default function currentTurn(player1, player2) {
     }
     attacks.push(JSON.stringify(attack));
     setTimeout(() => {
-      if (player1.board.receiveAttack(attack) === true) {
+      let test = player1.board.receiveAttack(attack);
+      if (test === "sunk") {
+        fieldsArray = [];
+      } else if (test === true) {
         // console.log(attackData);
         if (attackData) {
           if (attackData[2] === "horizontal") {
@@ -68,8 +71,6 @@ function surroundingFieldLeft(field) {
     field[1] - 1 >= 0 &&
     !attacks.includes(JSON.stringify([field[0], field[1] - 1]))
   ) {
-    console.log("this is it");
-    console.log(JSON.stringify([field[0], field[1] - 1]));
     fieldsArray.push([field[0], field[1] - 1, "horizontal"]);
   }
 }

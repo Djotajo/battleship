@@ -328,7 +328,6 @@ export default function game() {
           (element) => element.name === `${Number(butId[8]) + n}${butId[10]}`
         );
         shipField.classList.add("shipped");
-        console.log(`url(rotated${found.img})`);
         shipField.style.backgroundImage = `url(rotated${found.img})`;
       }
     }
