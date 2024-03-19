@@ -5,7 +5,6 @@ export default function currentTurn(player1, player2) {
   if (!player1.board.allShipsSunk() && !player2.board.allShipsSunk()) {
     let attack;
     let attackData;
-    // console.log(`These are attacks ${attacks}`);
     if (fieldsArray.length === 0) {
       attack = randomAIAttack();
     } else {
@@ -18,7 +17,6 @@ export default function currentTurn(player1, player2) {
       if (test === "sunk") {
         fieldsArray = [];
       } else if (test === true) {
-        // console.log(attackData);
         if (attackData) {
           if (attackData[2] === "horizontal") {
             fieldsArray = fieldsArray.filter((e) => e[2] === "horizontal");
@@ -40,13 +38,6 @@ export default function currentTurn(player1, player2) {
   }
 }
 let fieldsArray = [];
-
-// function surroundingFields(field) {
-//   fieldsArray.push([field[0] + 1, field[1]]);
-//   fieldsArray.push([field[0] - 1, field[1]]);
-//   fieldsArray.push([field[0], field[1] + 1]);
-//   fieldsArray.push([field[0], field[1] - 1]);
-// }
 
 function surroundingFieldTop(field) {
   if (
